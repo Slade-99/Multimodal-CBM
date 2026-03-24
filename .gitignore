@@ -17,3 +17,13 @@ logs/
 *.pt
 *.pth
 *.ckpt
+checkpoints/
+*.h5
+*.json
+*.csv
+*.tsv
+*.log
+*.out
+*.tmp 
+*.bak
+*.swp

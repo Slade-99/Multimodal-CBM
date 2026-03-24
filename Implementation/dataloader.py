@@ -6,14 +6,14 @@ import wfdb
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
-from Dataloader.dropout import ModalityDropoutConfig , ModalityDropoutScheduler, apply_modality_dropout
+from modality_dropout import ModalityDropoutConfig , ModalityDropoutScheduler, apply_modality_dropout
 from typing import Dict
 
 # ================= CONFIG =================
 
 CXR_DIR = '/home/azwad/Works/Multimodal-CBM/Datasets/Data/mimic_cxr'
 ECG_DIR = '/home/azwad/Works/Multimodal-CBM/Datasets/Data/mimic_ecg'
-METADATA_CSV = '/home/azwad/Works/Multimodal-CBM/Datasets/mimic-cxr-reports (1)/mimic-cxr-2.0.0-metadata.csv'
+METADATA_CSV = '/home/azwad/Works/Multimodal-CBM/Datasets/CXR/mimic-cxr-2.0.0-metadata.csv'
 
 # ================= CONCEPTS =================
 
@@ -124,24 +124,58 @@ class MultimodalCBMDataset(Dataset):
         self.data = pd.read_csv(csv_path)
         self.transform = transform
         self.is_train = is_train
-        self.dropout_config  = dropout_config
-        self.current_p  = {m: 0.0 for m in
-                            (dropout_config.active_modalities
-                             if dropout_config else [])}
+        self.dropout_config = dropout_config
+        self.current_p = {m: 0.0 for m in (dropout_config.active_modalities if dropout_config else [])}
 
         if scaler is None:
-            # Fallback: fit scaler locally (should only happen for standalone
-            # train-only use; always prefer passing scaler from get_dataloaders)
             self.mean, self.std = compute_scaler(csv_path)
         else:
             self.mean, self.std = scaler
 
-        # ===== CXR VIEW METADATA =====
+        # ===== RESTORED: CXR VIEW METADATA =====
         try:
             meta = pd.read_csv(METADATA_CSV, usecols=['dicom_id', 'ViewPosition'])
             self.view_map = dict(zip(meta['dicom_id'], meta['ViewPosition']))
         except Exception:
             self.view_map = {}
+
+        # ===== FAST: Pre-process all EHR data at once =====
+        print("Pre-processing EHR data into RAM...")
+        self.ehr_features_all, self.ehr_masks_all = self._bulk_process_ehr(self.data)
+        
+        # Pre-extract concepts and targets to pure numpy/tensors for fast indexing
+        self.cxr_concepts_all = torch.tensor(self.data[CXR_CONCEPTS].values.astype(float), dtype=torch.float32)
+        self.ecg_concepts_all = torch.tensor(self.data[ECG_CONCEPTS].values.astype(float), dtype=torch.float32)
+        self.ehr_concepts_all = torch.tensor(self.data[EHR_CONCEPTS].values.astype(float), dtype=torch.float32)
+        self.mort_targets_all = torch.tensor(self.data['label_mortality'].values, dtype=torch.long)
+        self.ahf_targets_all = torch.tensor(self.data['label_ahf'].values, dtype=torch.long)
+
+
+
+    def _bulk_process_ehr(self, df):
+        raw_cont = df[CONTINUOUS_FEATURES].astype(float).replace([np.inf, -np.inf], np.nan)
+        raw_bin = df[BINARY_FEATURES].astype(float).replace([np.inf, -np.inf], np.nan)
+        
+        # Clip
+        for col, (lo, hi) in CLIP_RANGES.items():
+            if col in raw_cont.columns:
+                raw_cont[col] = raw_cont[col].where((raw_cont[col] >= lo) & (raw_cont[col] <= hi), np.nan)
+                
+        # Masks
+        mask_cont = (~raw_cont.isna()).astype(float)
+        mask_bin = (~raw_bin.isna()).astype(float)
+        
+        # Normalize & Impute
+        norm_cont = ((raw_cont - self.mean) / self.std).fillna(0.0)
+        norm_bin = raw_bin.fillna(0.0)
+        
+        all_features = pd.concat([norm_cont, norm_bin], axis=1).values
+        all_masks = pd.concat([mask_cont, mask_bin], axis=1).values
+        
+        return torch.tensor(all_features, dtype=torch.float32), torch.tensor(all_masks, dtype=torch.float32)
+
+
+
 
 
     def set_dropout_probs(self, probs: Dict[str, float]):
@@ -227,68 +261,55 @@ class MultimodalCBMDataset(Dataset):
     # ================= __getitem__ =================
 
     def __getitem__(self, idx):
-        row = self.data.iloc[idx]
+        
 
         # ===== CXR =====
+        row = self.data.iloc[idx] # iloc once just to get IDs is okay, but avoid for math
         cxr_folder = str(row['report_path']).replace('.txt', '')
-        full_path  = os.path.join(CXR_DIR, cxr_folder)
-
-        img_name = self._get_best_cxr(full_path)
-        if img_name is None:
-            return None
-
-        try:
-            image = Image.open(os.path.join(full_path, img_name)).convert('RGB')
-        except Exception:
-            return None
-
-        if self.transform:
-            image = self.transform(image)
+        
+        # Initialize HDF5 file object lazily per worker
+        if not hasattr(self, 'h5_file'):
+            import h5py
+            self.h5_file = h5py.File('/home/azwad/Works/Multimodal-CBM/Datasets/Data/cxr_images.h5', 'r')
+            
+        if cxr_folder in self.h5_file:
+            image_np = self.h5_file[cxr_folder][:]
+            image = Image.fromarray(image_np)
+            if self.transform: image = self.transform(image)
+        else:
+            image = torch.zeros((3, 224, 224))
 
         # ===== ECG =====
         ecg_tensor = torch.zeros((12, 5000))
         ecg_mask   = torch.tensor(0.0)
 
+        FAST_ECG_DIR = '/home/azwad/Works/Multimodal-CBM/Datasets/Data/mimic_ecg_npy'
+
         if pd.notna(row['ecg_study_id']):
-            try:
-                sid  = str(int(row['subject_id']))
-                eid  = str(int(row['ecg_study_id']))
-                path = os.path.join(
-                    ECG_DIR, f"p{sid[:4]}", f"p{sid}", f"s{eid}", eid
-                )
-                record = wfdb.rdrecord(path)
-                signal = record.p_signal
-                signal = np.nan_to_num(signal)
-
-                # Per-channel z-score normalisation (standard for ECG)
-                signal = (signal - signal.mean(axis=0)) / (signal.std(axis=0) + 1e-8)
-                signal = signal.T  # (12, T)
-
+            eid = str(int(row['ecg_study_id']))
+            npy_path = os.path.join(FAST_ECG_DIR, f"{eid}.npy")
+            
+            if os.path.exists(npy_path):
+                # np.load is nearly instantaneous
+                signal = np.load(npy_path)
+                
+                # Apply data augmentation only during training
                 if self.is_train:
                     signal += np.random.normal(0, 0.05, signal.shape)
 
                 ecg_tensor = torch.tensor(signal, dtype=torch.float32)
                 ecg_mask   = torch.tensor(1.0)
-            except Exception:
-                pass
 
         # ===== EHR =====
-        ehr_features, ehr_mask = self._process_ehr(row)
-
-        # ===== CONCEPTS =====
-        ehr_concepts = torch.tensor(
-            row[EHR_CONCEPTS].values.astype(float), dtype=torch.float32
-        )
-        cxr_concepts = torch.tensor(
-            row[CXR_CONCEPTS].values.astype(float), dtype=torch.float32
-        )
-        ecg_concepts = torch.tensor(
-            row[ECG_CONCEPTS].values.astype(float), dtype=torch.float32
-        )
-
-        # ===== TARGETS =====
-        y_mort = torch.tensor(row['label_mortality'], dtype=torch.long)
-        y_ahf  = torch.tensor(row['label_ahf'],       dtype=torch.long)
+        ehr_features = self.ehr_features_all[idx]
+        ehr_mask = self.ehr_masks_all[idx]
+        
+        cxr_concepts = self.cxr_concepts_all[idx]
+        ecg_concepts = self.ecg_concepts_all[idx]
+        ehr_concepts = self.ehr_concepts_all[idx]
+        
+        y_mort = self.mort_targets_all[idx]
+        y_ahf = self.ahf_targets_all[idx]
 
 
 
@@ -366,7 +387,11 @@ def get_dataloaders(train_csv, val_csv, test_csv, batch_size=32, dropout_config:
 
     train_loader = DataLoader(
         train_ds, batch_size=batch_size, shuffle=True,
-        num_workers=4, collate_fn=clean_collate
+        num_workers=8,               # Hires more background assistants
+        pin_memory=True,             # Puts data directly into fast lane for GPU transfer
+        prefetch_factor=2,           # Tells assistants to grab 2 batches in advance
+        persistent_workers=True,     # Keeps assistants alive between epochs
+        collate_fn=clean_collate
     )
     val_loader = DataLoader(
         val_ds, batch_size=batch_size, shuffle=False,
@@ -383,9 +408,9 @@ def get_dataloaders(train_csv, val_csv, test_csv, batch_size=32, dropout_config:
 # ================= QUICK SANITY CHECK =================
 
 if __name__ == "__main__":
-    train_csv_path = "/home/azwad/Works/Multimodal-CBM/Datasets/Updated_Preprocessed/New_2/train_final.csv"
-    val_csv_path   = "/home/azwad/Works/Multimodal-CBM/Datasets/Updated_Preprocessed/New_2/val_final.csv"
-    test_csv_path  = "/home/azwad/Works/Multimodal-CBM/Datasets/Updated_Preprocessed/New_2/test_final.csv"
+    train_csv_path = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/train_final.csv"
+    val_csv_path   = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/val_final.csv"
+    test_csv_path  = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/test_final.csv"
 
     TRIMODAL_CONFIG = ModalityDropoutConfig(
     p_max={'cxr': 0.05, 'ehr': 0.30, 'ecg': 0.30},
