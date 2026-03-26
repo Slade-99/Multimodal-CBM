@@ -46,7 +46,7 @@ class JointCBMLoss(nn.Module):
         self.beta = beta
         
         # 1. Load the Concept Weights we just generated
-        weight_path = "D:\\Works\\Multimodal-CBM\\Implementation\\concept_weights.pt"
+        weight_path = "/home/azwad/Works/Multimodal-CBM/Implementation/concept_weights.pt"
         if not os.path.exists(weight_path):
             raise FileNotFoundError(f"Missing {weight_path}. Run get_concept_weights.py first!")
             
@@ -161,9 +161,9 @@ def main():
         dropout_scheduler = None
 
     # --- 2. Load Data ---
-    train_csv =    "D:\\Works\\Multimodal-CBM\\Data\\train_final.csv"
-    val_csv   = "D:\\Works\\Multimodal-CBM\\Data\\val_final.csv"
-    test_csv  = "D:\\Works\\Multimodal-CBM\\Data\\test_final.csv"
+    train_csv =    "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/train_final.csv"
+    val_csv   = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/val_final.csv"
+    test_csv  = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/test_final.csv"
 
 
     train_loader, val_loader, test_loader, train_ds = get_dataloaders(
