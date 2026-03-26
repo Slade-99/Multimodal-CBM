@@ -46,7 +46,7 @@ class JointCBMLoss(nn.Module):
         self.beta = beta
         
         # 1. Load the Concept Weights we just generated
-        weight_path = "/home/azwad/Works/Multimodal-CBM/Implementation/concept_weights.pt"
+        weight_path = "D:\\Works\\Multimodal-CBM\\Implementation\\concept_weights.pt"
         if not os.path.exists(weight_path):
             raise FileNotFoundError(f"Missing {weight_path}. Run get_concept_weights.py first!")
             
@@ -161,9 +161,9 @@ def main():
         dropout_scheduler = None
 
     # --- 2. Load Data ---
-    train_csv =    "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/train_final.csv"
-    val_csv   = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/val_final.csv"
-    test_csv  = "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/test_final.csv"
+    train_csv =    "D:\\Works\\Multimodal-CBM\\Data\\train_final.csv"
+    val_csv   = "D:\\Works\\Multimodal-CBM\\Data\\val_final.csv"
+    test_csv  = "D:\\Works\\Multimodal-CBM\\Data\\test_final.csv"
 
 
     train_loader, val_loader, test_loader, train_ds = get_dataloaders(
@@ -177,17 +177,12 @@ def main():
     model = MultimodalCBM().to(device)
     criterion = JointCBMLoss(alpha=args.alpha_concept, beta=args.beta_target, device=device)
     
-    encoder_params = (
-        list(model.cxr_encoder.parameters()) +
-        list(model.ecg_encoder.parameters()) +
-        list(model.ehr_encoder.parameters())
-    )
-    encoder_ids = set(id(p) for p in encoder_params)
-    other_params = [p for p in model.parameters() if id(p) not in encoder_ids]
-
     optimizer = AdamW([
-        {'params': encoder_params, 'lr': args.lr_finetune},
-        {'params': other_params,   'lr': args.lr_e2e},
+        {'params': model.cxr_encoder.parameters(), 'lr': args.lr_finetune},
+        {'params': model.ecg_encoder.parameters(), 'lr': args.lr_finetune},
+        {'params': model.ehr_encoder.parameters(), 'lr': args.lr_finetune},
+        {'params': model.mortality_head.parameters(), 'lr': args.lr_e2e},
+        {'params': model.ahf_head.parameters(), 'lr': args.lr_e2e}
     ], weight_decay=args.weight_decay)
 
     scheduler = ReduceLROnPlateau(optimizer, mode='max', patience=args.patience_scheduler, factor=0.5)
