@@ -5,7 +5,7 @@
 set -e
 
 # These are the 7 exact experiments we established
-EXPERIMENTS=("cxr_only" "ecg_only" "ehr_only" "cxr_ehr" "cxr_ecg" "ehr_ecg" "trimodal")
+EXPERIMENTS=( "trimodal")
 
 echo "Starting the 7-stage Multimodal CBM pipeline..."
 
@@ -23,7 +23,7 @@ for EXP in "${EXPERIMENTS[@]}"; do
     
     # Phase 2: Evaluate the model (Threshold tuning and test set metrics)
     echo "--> [2/2] Evaluating $EXP..."
-    python test_and_evaluate.py --experiment "$EXP" --exp_name "$EXP_DIR_NAME"
+    python test.py --experiment "$EXP" --exp_name "$EXP_DIR_NAME"
     
     echo "Finished $EXP. Results and plots saved in checkpoints/$EXP_DIR_NAME"
     echo ""

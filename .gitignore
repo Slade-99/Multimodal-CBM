@@ -18,6 +18,7 @@ logs/
 *.pth
 *.ckpt
 checkpoints/
+checkpoints_2/
 *.h5
 *.json
 *.csv

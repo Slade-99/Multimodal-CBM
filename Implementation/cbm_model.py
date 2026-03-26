@@ -120,8 +120,65 @@ class EHREncoder(nn.Module):
         # Output shape: (B, 13)
         return self.network(x)
 
-# ================= FULL MULTIMODAL CBM =================
 
+
+
+
+
+class CrossModalConceptAttention(nn.Module):
+    """
+    Applies cross-modal attention directly in concept space.
+    Each modality's concepts attend to the concepts of every other modality,
+    capturing inter-modal clinical correlations at the bottleneck level.
+    """
+    def __init__(self, cxr_dim=15, ecg_dim=14, ehr_dim=13):
+        super().__init__()
+        total = cxr_dim + ecg_dim + ehr_dim  # 42
+
+        # One attention head per modality — query is that modality,
+        # keys/values are the full concatenated concept vector
+        self.attn_cxr = nn.MultiheadAttention(embed_dim=cxr_dim, num_heads=1, batch_first=True)
+        self.attn_ecg = nn.MultiheadAttention(embed_dim=ecg_dim, num_heads=1, batch_first=True)
+        self.attn_ehr = nn.MultiheadAttention(embed_dim=ehr_dim, num_heads=1, batch_first=True)
+
+        # Project full concept vector down to each modality's dim for key/value
+        self.kv_proj_cxr = nn.Linear(total, cxr_dim)
+        self.kv_proj_ecg = nn.Linear(total, ecg_dim)
+        self.kv_proj_ehr = nn.Linear(total, ehr_dim)
+
+        # Layer norms for residual stability
+        self.norm_cxr = nn.LayerNorm(cxr_dim)
+        self.norm_ecg = nn.LayerNorm(ecg_dim)
+        self.norm_ehr = nn.LayerNorm(ehr_dim)
+
+    def forward(self, cxr_probs, ecg_probs, ehr_probs):
+        # Full concept context for key/value
+        context = torch.cat([cxr_probs, ecg_probs, ehr_probs], dim=1)  # (B, 42)
+
+        # Reshape to (B, 1, dim) for MultiheadAttention
+        q_cxr = cxr_probs.unsqueeze(1)
+        q_ecg = ecg_probs.unsqueeze(1)
+        q_ehr = ehr_probs.unsqueeze(1)
+
+        kv_cxr = self.kv_proj_cxr(context).unsqueeze(1)
+        kv_ecg = self.kv_proj_ecg(context).unsqueeze(1)
+        kv_ehr = self.kv_proj_ehr(context).unsqueeze(1)
+
+        # Each modality attends to cross-modal context
+        cxr_attended, _ = self.attn_cxr(q_cxr, kv_cxr, kv_cxr)
+        ecg_attended, _ = self.attn_ecg(q_ecg, kv_ecg, kv_ecg)
+        ehr_attended, _ = self.attn_ehr(q_ehr, kv_ehr, kv_ehr)
+
+        # Residual connection + layer norm
+        cxr_out = self.norm_cxr(cxr_probs + cxr_attended.squeeze(1))
+        ecg_out = self.norm_ecg(ecg_probs + ecg_attended.squeeze(1))
+        ehr_out = self.norm_ehr(ehr_probs + ehr_attended.squeeze(1))
+
+        return cxr_out, ecg_out, ehr_out
+    
+
+
+# ================= FULL MULTIMODAL CBM =================
 class MultimodalCBM(nn.Module):
     def __init__(self):
         super().__init__()
@@ -130,7 +187,9 @@ class MultimodalCBM(nn.Module):
         self.cxr_encoder = CXREncoder(num_concepts=15)
         self.ecg_encoder = ECGEncoder(num_concepts=14)
         self.ehr_encoder = EHREncoder(input_dim=21, num_concepts=13)
-        
+        self.cross_modal_attention = CrossModalConceptAttention(
+            cxr_dim=15, ecg_dim=14, ehr_dim=13
+        )
         # 2. Downstream Task Classifiers
         # Total concepts = 15 (CXR) + 14 (ECG) + 13 (EHR) = 42
         total_concepts = 42
@@ -154,35 +213,56 @@ class MultimodalCBM(nn.Module):
         during training, its predicted concepts are zeroed out before fusion.
         """
         
-        # 1. Predict Concepts (Raw Logits)
+        # Clean logits for the loss function
         cxr_concept_logits = self.cxr_encoder(image)
         ecg_concept_logits = self.ecg_encoder(waveform)
         ehr_concept_logits = self.ehr_encoder(ehr_features)
-        
-        # Apply Sigmoid to turn logits into probabilities (0 to 1) for the bottleneck
+
+        # Probabilities for the bottleneck
         cxr_concept_probs = torch.sigmoid(cxr_concept_logits)
         ecg_concept_probs = torch.sigmoid(ecg_concept_logits)
         ehr_concept_probs = torch.sigmoid(ehr_concept_logits)
+
+        # Add noise to probabilities only during training, after sigmoid
+        if self.training:
+            cxr_concept_probs = (cxr_concept_probs + torch.randn_like(cxr_concept_probs) * 0.1).clamp(0, 1)
+            ecg_concept_probs = (ecg_concept_probs + torch.randn_like(ecg_concept_probs) * 0.1).clamp(0, 1)
+            ehr_concept_probs = (ehr_concept_probs + torch.randn_like(ehr_concept_probs) * 0.1).clamp(0, 1)
         
         # 2. Apply Modality Dropouts
         # If mask is 0 (dropped), the probabilities become 0. 
         # We use .view(-1, 1) to ensure the mask shape aligns with the batch dimension
+                # Apply modality dropout masks
         cxr_concept_probs = cxr_concept_probs * cxr_mask.view(-1, 1)
         ecg_concept_probs = ecg_concept_probs * ecg_mask.view(-1, 1)
         ehr_concept_probs = ehr_concept_probs * ehr_mask.view(-1, 1)
-        
-        # 3. Fusion (Concatenation)
-        # Shape: (B, 42)
-        fused_concepts = torch.cat([cxr_concept_probs, ecg_concept_probs, ehr_concept_probs], dim=1)
-        
-        # 4. Downstream Predictions (Raw Logits)
-        mortality_logits = self.mortality_head(fused_concepts).squeeze(-1) # Shape: (B,)
-        ahf_logits = self.ahf_head(fused_concepts).squeeze(-1)             # Shape: (B,)
-        
+
+        # 3. Cross-modal attention in concept space
+        cxr_attended, ecg_attended, ehr_attended = self.cross_modal_attention(
+            cxr_concept_probs, ecg_concept_probs, ehr_concept_probs
+        )
+
+        # Re-apply masks after attention — attention can reintroduce signal
+        # from dropped modalities through the context projection, so we
+        # zero them out again to enforce the dropout contract
+        cxr_attended = cxr_attended * cxr_mask.view(-1, 1)
+        ecg_attended = ecg_attended * ecg_mask.view(-1, 1)
+        ehr_attended = ehr_attended * ehr_mask.view(-1, 1)
+
+        # 4. Fusion — now attention-refined concepts
+        fused_concepts = torch.cat([cxr_attended, ecg_attended, ehr_attended], dim=1)  # (B, 42)
+
+        # 5. Downstream predictions
+        mortality_logits = self.mortality_head(fused_concepts).squeeze(-1)
+        ahf_logits       = self.ahf_head(fused_concepts).squeeze(-1)
+
         return {
             'cxr_concept_logits': cxr_concept_logits,
             'ecg_concept_logits': ecg_concept_logits,
             'ehr_concept_logits': ehr_concept_logits,
-            'mortality_logits': mortality_logits,
-            'ahf_logits': ahf_logits
+            'cxr_attended':       cxr_attended,
+            'ecg_attended':       ecg_attended,
+            'ehr_attended':       ehr_attended,
+            'mortality_logits':   mortality_logits,
+            'ahf_logits':         ahf_logits,
         }

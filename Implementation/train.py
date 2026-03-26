@@ -11,6 +11,11 @@ from torch.amp import autocast, GradScaler
 from config import get_args
 from cbm_model import MultimodalCBM
 from dataloader import get_dataloaders, ModalityDropoutConfig
+from modality_dropout import (
+    TRIMODAL_CONFIG, BIMODAL_CXR_EHR_CONFIG, 
+    BIMODAL_CXR_ECG_CONFIG, BIMODAL_EHR_ECG_CONFIG, 
+    ModalityDropoutScheduler
+)
 
 # ================= SETUP LOGGING =================
 
@@ -35,27 +40,71 @@ def setup_logger(save_dir, exp_name):
 # ================= JOINT LOSS FUNCTION =================
 
 class JointCBMLoss(nn.Module):
-    def __init__(self, alpha=1.0, beta=1.0):
+    def __init__(self, alpha=1.0, beta=1.0, device='cuda'):
         super().__init__()
         self.alpha = alpha
         self.beta = beta
-        self.bce_loss = nn.BCEWithLogitsLoss()
-
-    def forward(self, outputs, targets):
-        # 1. Concept Losses
-        loss_cxr = self.bce_loss(outputs['cxr_concept_logits'], targets['cxr_concepts'].float())
-        loss_ecg = self.bce_loss(outputs['ecg_concept_logits'], targets['ecg_concepts'].float())
-        loss_ehr = self.bce_loss(outputs['ehr_concept_logits'], targets['ehr_concepts'].float())
         
+        # 1. Load the Concept Weights we just generated
+        weight_path = "/home/azwad/Works/Multimodal-CBM/Implementation/concept_weights.pt"
+        if not os.path.exists(weight_path):
+            raise FileNotFoundError(f"Missing {weight_path}. Run get_concept_weights.py first!")
+            
+        concept_weights = torch.load(weight_path, map_location=device, weights_only=True)
+        
+        # 2. Concept Losses (Now fully weighted against class imbalance!)
+        self.bce_cxr = nn.BCEWithLogitsLoss(pos_weight=concept_weights['cxr'])
+        self.bce_ecg = nn.BCEWithLogitsLoss(pos_weight=concept_weights['ecg'])
+        self.bce_ehr = nn.BCEWithLogitsLoss(pos_weight=concept_weights['ehr'])
+        
+        # 3. Target Losses (From our previous fix)
+        mortality_weight = torch.tensor([14.44], device=device)
+        self.bce_mortality = nn.BCEWithLogitsLoss(pos_weight=mortality_weight)
+        
+        ahf_weight = torch.tensor([2.89], device=device)
+        self.bce_ahf = nn.BCEWithLogitsLoss(pos_weight=ahf_weight)
+
+    def forward(self, outputs, targets, cxr_mod_mask, ecg_mod_mask, ehr_mod_mask):
+
+        # --- Concept losses: only supervise present modalities ---
+        def masked_concept_loss(loss_fn, logits, labels, mask):
+            present = mask.bool()
+            if present.sum() == 0:
+                return torch.tensor(0.0, device=logits.device)
+            return loss_fn(logits[present], labels[present].float())
+
+        loss_cxr = masked_concept_loss(
+            self.bce_cxr,
+            outputs['cxr_concept_logits'],
+            targets['cxr_concepts'],
+            cxr_mod_mask
+        )
+        loss_ecg = masked_concept_loss(
+            self.bce_ecg,
+            outputs['ecg_concept_logits'],
+            targets['ecg_concepts'],
+            ecg_mod_mask
+        )
+        loss_ehr = masked_concept_loss(
+            self.bce_ehr,
+            outputs['ehr_concept_logits'],
+            targets['ehr_concepts'],
+            ehr_mod_mask
+        )
+
         concept_loss = (loss_cxr + loss_ecg + loss_ehr) / 3.0
 
-        # 2. Target Losses
-        loss_mortality = self.bce_loss(outputs['mortality_logits'], targets['target_mortality'].float())
-        loss_ahf = self.bce_loss(outputs['ahf_logits'], targets['target_ahf'].float())
-        
+        # --- Task losses: always computed regardless of dropout ---
+        loss_mortality = self.bce_mortality(
+            outputs['mortality_logits'],
+            targets['target_mortality'].float()
+        )
+        loss_ahf = self.bce_ahf(
+            outputs['ahf_logits'],
+            targets['target_ahf'].float()
+        )
         target_loss = (loss_mortality + loss_ahf) / 2.0
 
-        # 3. Total Weighted Loss
         total_loss = (self.alpha * concept_loss) + (self.beta * target_loss)
         return total_loss, concept_loss, target_loss
 
@@ -87,10 +136,29 @@ def main():
     if 'ecg' in args.experiment or args.experiment == 'trimodal': active_mods.append('ecg')
     if 'ehr' in args.experiment or args.experiment == 'trimodal': active_mods.append('ehr')
 
-    exp_config = ModalityDropoutConfig(
-        p_max={'cxr': 0.05, 'ehr': 0.30, 'ecg': 0.30}, 
-        active_modalities=active_mods
-    )
+    
+
+    if args.experiment == 'trimodal':
+        drop_config = TRIMODAL_CONFIG
+    elif args.experiment == 'cxr_ehr':
+        drop_config = BIMODAL_CXR_EHR_CONFIG
+    elif args.experiment == 'cxr_ecg':
+        drop_config = BIMODAL_CXR_ECG_CONFIG
+    elif args.experiment == 'ehr_ecg':
+        drop_config = BIMODAL_EHR_ECG_CONFIG
+    else:
+        # Unimodal experiments don't use dropout
+        drop_config = None
+    
+    if drop_config:
+        print(f"Active Modalities: {active_mods} with Modality Dropout")
+    else:
+        print(f"Active Modalities: {active_mods} without Modality Dropout")
+
+    if drop_config:
+        dropout_scheduler = ModalityDropoutScheduler(config=drop_config, warmup_epochs=20)
+    else:
+        dropout_scheduler = None
 
     # --- 2. Load Data ---
     train_csv =    "/home/azwad/Works/Multimodal-CBM/Datasets/Preprocessed/train_final.csv"
@@ -101,20 +169,25 @@ def main():
     train_loader, val_loader, test_loader, train_ds = get_dataloaders(
         train_csv, val_csv, test_csv, 
         batch_size=args.batch_size, 
-        dropout_config=exp_config
+        dropout_config=drop_config
     )
     logger.info("Dataloaders initialized successfully.")
 
     # --- 3. Initialize Model, Loss, Optimizer ---
     model = MultimodalCBM().to(device)
-    criterion = JointCBMLoss(alpha=args.alpha_concept, beta=args.beta_target)
+    criterion = JointCBMLoss(alpha=args.alpha_concept, beta=args.beta_target, device=device)
+    
+    encoder_params = (
+        list(model.cxr_encoder.parameters()) +
+        list(model.ecg_encoder.parameters()) +
+        list(model.ehr_encoder.parameters())
+    )
+    encoder_ids = set(id(p) for p in encoder_params)
+    other_params = [p for p in model.parameters() if id(p) not in encoder_ids]
 
     optimizer = AdamW([
-        {'params': model.cxr_encoder.parameters(), 'lr': args.lr_finetune},
-        {'params': model.ecg_encoder.parameters(), 'lr': args.lr_finetune},
-        {'params': model.ehr_encoder.parameters(), 'lr': args.lr_finetune},
-        {'params': model.mortality_head.parameters(), 'lr': args.lr_e2e},
-        {'params': model.ahf_head.parameters(), 'lr': args.lr_e2e}
+        {'params': encoder_params, 'lr': args.lr_finetune},
+        {'params': other_params,   'lr': args.lr_e2e},
     ], weight_decay=args.weight_decay)
 
     scheduler = ReduceLROnPlateau(optimizer, mode='max', patience=args.patience_scheduler, factor=0.5)
@@ -127,6 +200,14 @@ def main():
     # --- 5. Epoch Loop ---
     scaler = GradScaler()
     for epoch in range(args.epochs):
+
+        if dropout_scheduler and hasattr(train_ds, 'set_dropout_probs'):
+            train_ds.set_dropout_probs(dropout_scheduler.current_probs)
+            print(f"Epoch {epoch+1} Dropout Probs: {dropout_scheduler.current_probs}")
+            
+
+
+
         model.train()
         train_loss = 0.0
         
@@ -155,7 +236,7 @@ def main():
             # 1. Wrap forward pass and loss in autocast
             with autocast('cuda'):
                 outputs = model(image, waveform, ehr_features, cxr_mask, ecg_mask, ehr_mask)
-                loss, _, _ = criterion(outputs, targets)
+                loss, _, _ = criterion(outputs, targets, cxr_mask, ecg_mask, ehr_mask)
             
             # 2. Scale the loss and backward pass
             scaler.scale(loss).backward()
@@ -194,7 +275,7 @@ def main():
                 }
 
                 outputs = model(image, waveform, ehr_features, cxr_mask, ecg_mask, ehr_mask)
-                loss, _, _ = criterion(outputs, targets)
+                loss, _, _ = criterion(outputs, targets, cxr_mask, ecg_mask, ehr_mask)
                 val_loss += loss.item()
 
                 mort_probs = torch.sigmoid(outputs['mortality_logits']).cpu().numpy()
@@ -220,6 +301,8 @@ def main():
         logger.info(f"AHF       - AUROC: {ahf_auroc:.4f}, AUPRC: {ahf_auprc:.4f}")
         logger.info(f"Mean Val AUROC: {avg_val_auroc:.4f}")
 
+        if dropout_scheduler is not None:
+            dropout_scheduler.step()
         # --- 7. Scheduler & Early Stopping ---
         scheduler.step(avg_val_auroc)
 
