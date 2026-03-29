@@ -10,10 +10,13 @@ def parse_experiment_logs(file_paths):
         "Mortality_AUROC": r"MORTALITY PREDICTION:.*?AUROC: ([\d.]+)",
         "Mortality_AUPRC": r"MORTALITY PREDICTION:.*?AUPRC: ([\d.]+)",
         "Mortality_F1": r"MORTALITY PREDICTION:.*?F1: ([\d.]+)",
+        "Mortality_ECE": r"MORTALITY PREDICTION:.*?ECE: ([\d.]+)",
         "AHF_AUROC": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?AUROC: ([\d.]+)",
         "AHF_AUPRC": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?AUPRC: ([\d.]+)",
         "AHF_F1": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?F1: ([\d.]+)",
-        "Overall_Concept_Accuracy": r"OVERALL CONCEPT PREDICTION ACCURACY: ([\d.]+)"
+        "AHF_ECE": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?ECE: ([\d.]+)",
+        "Overall_Concept_Accuracy": r"OVERALL CONCEPT PREDICTION ACCURACY: ([\d.]+)",
+        
     }
 
     for path in file_paths:
@@ -34,13 +37,13 @@ def parse_experiment_logs(file_paths):
 
 # --- USAGE ---
 file_list = [
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_cxr_only/evaluation_log.txt",
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_ehr_only/evaluation_log.txt",
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_ecg_only/evaluation_log.txt",
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_cxr_ecg/evaluation_log.txt",
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_cxr_ehr/evaluation_log.txt",
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_ehr_ecg/evaluation_log.txt",
-    "/home/azwad/Works/Multimodal-CBM/Implementation/checkpoints_2/run_trimodal/evaluation_log.txt"
+    "/home/azwad/Works/Results/run_cxr_only/evaluation_log.txt",
+    "/home/azwad/Works/Results/run_ehr_only/evaluation_log.txt",
+    "/home/azwad/Works/Results/run_ecg_only/evaluation_log.txt",
+    "/home/azwad/Works/Results/run_cxr_ecg/evaluation_log.txt",
+    "/home/azwad/Works/Results/run_cxr_ehr/evaluation_log.txt",
+    "/home/azwad/Works/Results/run_ehr_ecg/evaluation_log.txt",
+    "/home/azwad/Works/Results/run_trimodal/evaluation_log.txt"
     # Add your other paths here
 ]
 

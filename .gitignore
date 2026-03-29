@@ -19,6 +19,8 @@ logs/
 *.ckpt
 checkpoints/
 checkpoints_2/
+combined_plots/
+contents.txt
 *.h5
 *.json
 *.csv

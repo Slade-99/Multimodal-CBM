@@ -5,7 +5,7 @@ from sklearn.metrics import auc
 
 # List of the exact experiments run
 EXPERIMENTS = ["cxr_only", "ecg_only", "ehr_only", "cxr_ehr", "cxr_ecg", "ehr_ecg", "trimodal"]
-CHECKPOINT_DIR = "./checkpoints"
+CHECKPOINT_DIR = "./Implementation/checkpoints_2"
 OUTPUT_DIR = "./combined_plots"
 
 # Clean names for the graph legends

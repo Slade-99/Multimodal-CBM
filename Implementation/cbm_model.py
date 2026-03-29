@@ -151,9 +151,14 @@ class CrossModalConceptAttention(nn.Module):
         self.norm_ecg = nn.LayerNorm(ecg_dim)
         self.norm_ehr = nn.LayerNorm(ehr_dim)
 
-    def forward(self, cxr_probs, ecg_probs, ehr_probs):
+    def forward(self, cxr_probs, ecg_probs, ehr_probs, 
+            cxr_mask, ecg_mask, ehr_mask):
         # Full concept context for key/value
-        context = torch.cat([cxr_probs, ecg_probs, ehr_probs], dim=1)  # (B, 42)
+        context = torch.cat([
+            cxr_probs * cxr_mask.view(-1, 1),
+            ecg_probs * ecg_mask.view(-1, 1),
+            ehr_probs * ehr_mask.view(-1, 1)
+        ], dim=1)
 
         # Reshape to (B, 1, dim) for MultiheadAttention
         q_cxr = cxr_probs.unsqueeze(1)
@@ -239,7 +244,8 @@ class MultimodalCBM(nn.Module):
 
         # 3. Cross-modal attention in concept space
         cxr_attended, ecg_attended, ehr_attended = self.cross_modal_attention(
-            cxr_concept_probs, ecg_concept_probs, ehr_concept_probs
+            cxr_concept_probs, ecg_concept_probs, ehr_concept_probs,
+            cxr_mask, ecg_mask, ehr_mask
         )
 
         # Re-apply masks after attention — attention can reintroduce signal

@@ -58,7 +58,7 @@ def get_args():
     parser.add_argument('--weight_decay', type=float, default=1e-4,
                         help="Weight decay (L2 penalty) for AdamW optimizer.")
     
-    parser.add_argument('--epochs', type=int, default=60,
+    parser.add_argument('--epochs', type=int, default=50,
                         help="Maximum number of training epochs.")
 
     # ================= SCHEDULER & EARLY STOPPING =================
