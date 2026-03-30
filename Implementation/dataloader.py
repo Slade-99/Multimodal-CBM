@@ -14,7 +14,10 @@ from typing import Dict
 CXR_DIR = '/home/azwad/Works/Multimodal-CBM/Datasets/Data/mimic_cxr'
 ECG_DIR = '/home/azwad/Works/Multimodal-CBM/Datasets/Data/mimic_ecg'
 METADATA_CSV = '/home/azwad/Works/Multimodal-CBM/Datasets/CXR/mimic-cxr-2.0.0-metadata.csv'
-
+TRIMODAL_CONFIG = ModalityDropoutConfig(
+    p_max={'cxr': 0.05, 'ehr': 0.30, 'ecg': 0.30},
+    active_modalities=['cxr', 'ehr', 'ecg']
+)
 # ================= CONCEPTS =================
 
 CXR_CONCEPTS = [

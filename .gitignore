@@ -21,6 +21,12 @@ checkpoints/
 checkpoints_2/
 combined_plots/
 contents.txt
+Extras/
+clinical_xai_summary.txt
+combined_plots_2/
+final_combined_figures/
+xai_visual_report.png
+Extras/
 *.h5
 *.json
 *.csv

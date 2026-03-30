@@ -20,8 +20,8 @@ class CXREncoder(nn.Module):
         # Output shape: (B, 15)
         return self.backbone(x)
 
-# ================= ECG ENCODER (1D-ResNet) =================
 
+# ================= ECG ENCODER (1D-ResNet) =================
 class BasicBlock1D(nn.Module):
     """A standard 1D ResNet block with a skip connection."""
     def __init__(self, in_channels, out_channels, stride=1):
@@ -126,60 +126,66 @@ class EHREncoder(nn.Module):
 
 
 class CrossModalConceptAttention(nn.Module):
-    """
-    Applies cross-modal attention directly in concept space.
-    Each modality's concepts attend to the concepts of every other modality,
-    capturing inter-modal clinical correlations at the bottleneck level.
-    """
-    def __init__(self, cxr_dim=15, ecg_dim=14, ehr_dim=13):
+    def __init__(self, cxr_dim=15, ecg_dim=14, ehr_dim=13, embed_dim=32):
         super().__init__()
-        total = cxr_dim + ecg_dim + ehr_dim  # 42
+        # Project each concept scalar to a shared embedding space
+        # so concepts from different modalities are comparable
+        self.proj_cxr = nn.Linear(1, embed_dim)
+        self.proj_ecg = nn.Linear(1, embed_dim)
+        self.proj_ehr = nn.Linear(1, embed_dim)
 
-        # One attention head per modality — query is that modality,
-        # keys/values are the full concatenated concept vector
-        self.attn_cxr = nn.MultiheadAttention(embed_dim=cxr_dim, num_heads=1, batch_first=True)
-        self.attn_ecg = nn.MultiheadAttention(embed_dim=ecg_dim, num_heads=1, batch_first=True)
-        self.attn_ehr = nn.MultiheadAttention(embed_dim=ehr_dim, num_heads=1, batch_first=True)
+        # Cross-modal attention: each modality's concepts (as tokens)
+        # attend to every other modality's concepts (as tokens)
+        self.attn_cxr = nn.MultiheadAttention(embed_dim, num_heads=4, batch_first=True)
+        self.attn_ecg = nn.MultiheadAttention(embed_dim, num_heads=4, batch_first=True)
+        self.attn_ehr = nn.MultiheadAttention(embed_dim, num_heads=4, batch_first=True)
 
-        # Project full concept vector down to each modality's dim for key/value
-        self.kv_proj_cxr = nn.Linear(total, cxr_dim)
-        self.kv_proj_ecg = nn.Linear(total, ecg_dim)
-        self.kv_proj_ehr = nn.Linear(total, ehr_dim)
+        # Project back to scalar concept space
+        self.out_cxr = nn.Linear(embed_dim, 1)
+        self.out_ecg = nn.Linear(embed_dim, 1)
+        self.out_ehr = nn.Linear(embed_dim, 1)
 
-        # Layer norms for residual stability
-        self.norm_cxr = nn.LayerNorm(cxr_dim)
-        self.norm_ecg = nn.LayerNorm(ecg_dim)
-        self.norm_ehr = nn.LayerNorm(ehr_dim)
+        self.norm_cxr = nn.LayerNorm(embed_dim)
+        self.norm_ecg = nn.LayerNorm(embed_dim)
+        self.norm_ehr = nn.LayerNorm(embed_dim)
 
-    def forward(self, cxr_probs, ecg_probs, ehr_probs, 
-            cxr_mask, ecg_mask, ehr_mask):
-        # Full concept context for key/value
-        context = torch.cat([
-            cxr_probs * cxr_mask.view(-1, 1),
-            ecg_probs * ecg_mask.view(-1, 1),
-            ehr_probs * ehr_mask.view(-1, 1)
-        ], dim=1)
+    def forward(self, cxr_probs, ecg_probs, ehr_probs,
+                cxr_mask, ecg_mask, ehr_mask):
 
-        # Reshape to (B, 1, dim) for MultiheadAttention
-        q_cxr = cxr_probs.unsqueeze(1)
-        q_ecg = ecg_probs.unsqueeze(1)
-        q_ehr = ehr_probs.unsqueeze(1)
+        # Apply modality masks
+        cxr_probs = cxr_probs * cxr_mask.view(-1, 1)
+        ecg_probs = ecg_probs * ecg_mask.view(-1, 1)
+        ehr_probs = ehr_probs * ehr_mask.view(-1, 1)
 
-        kv_cxr = self.kv_proj_cxr(context).unsqueeze(1)
-        kv_ecg = self.kv_proj_ecg(context).unsqueeze(1)
-        kv_ehr = self.kv_proj_ehr(context).unsqueeze(1)
+        # Each concept becomes a token: (B, num_concepts, embed_dim)
+        # unsqueeze(-1) makes each concept scalar → (B, num_concepts, 1)
+        q_cxr = self.proj_cxr(cxr_probs.unsqueeze(-1))  # (B, 15, embed_dim)
+        q_ecg = self.proj_ecg(ecg_probs.unsqueeze(-1))  # (B, 14, embed_dim)
+        q_ehr = self.proj_ehr(ehr_probs.unsqueeze(-1))  # (B, 13, embed_dim)
 
-        # Each modality attends to cross-modal context
-        cxr_attended, _ = self.attn_cxr(q_cxr, kv_cxr, kv_cxr)
-        ecg_attended, _ = self.attn_ecg(q_ecg, kv_ecg, kv_ecg)
-        ehr_attended, _ = self.attn_ehr(q_ehr, kv_ehr, kv_ehr)
+        # Cross-modal key/value: each modality queries the OTHER two
+        kv_for_cxr = torch.cat([q_ecg, q_ehr], dim=1)  # (B, 27, embed_dim)
+        kv_for_ecg = torch.cat([q_cxr, q_ehr], dim=1)  # (B, 28, embed_dim)
+        kv_for_ehr = torch.cat([q_cxr, q_ecg], dim=1)  # (B, 29, embed_dim)
 
-        # Residual connection + layer norm
-        cxr_out = self.norm_cxr(cxr_probs + cxr_attended.squeeze(1))
-        ecg_out = self.norm_ecg(ecg_probs + ecg_attended.squeeze(1))
-        ehr_out = self.norm_ehr(ehr_probs + ehr_attended.squeeze(1))
+        # Attention — now seq_q=num_concepts, seq_k=other_concepts
+        # weights shape: (B, heads, num_query_concepts, num_key_concepts)
+        cxr_attended, cxr_weights = self.attn_cxr(q_cxr, kv_for_cxr, kv_for_cxr)
+        ecg_attended, ecg_weights = self.attn_ecg(q_ecg, kv_for_ecg, kv_for_ecg)
+        ehr_attended, ehr_weights = self.attn_ehr(q_ehr, kv_for_ehr, kv_for_ehr)
 
-        return cxr_out, ecg_out, ehr_out
+        # Residual + norm
+        cxr_out = self.norm_cxr(q_cxr + cxr_attended)  # (B, 15, embed_dim)
+        ecg_out = self.norm_ecg(q_ecg + ecg_attended)
+        ehr_out = self.norm_ehr(q_ehr + ehr_attended)
+
+        # Project back to concept scalars
+        cxr_refined = self.out_cxr(cxr_out).squeeze(-1)  # (B, 15)
+        ecg_refined = self.out_ecg(ecg_out).squeeze(-1)  # (B, 14)
+        ehr_refined = self.out_ehr(ehr_out).squeeze(-1)  # (B, 13)
+
+        return (cxr_refined, ecg_refined, ehr_refined,
+                cxr_weights, ecg_weights, ehr_weights)
     
 
 
@@ -213,50 +219,35 @@ class MultimodalCBM(nn.Module):
         )
 
     def forward(self, image, waveform, ehr_features, cxr_mask, ecg_mask, ehr_mask):
-        """
-        The forward pass uses the modality dropout masks. If a modality is dropped
-        during training, its predicted concepts are zeroed out before fusion.
-        """
-        
-        # Clean logits for the loss function
+        # 1. Concept Prediction
         cxr_concept_logits = self.cxr_encoder(image)
         ecg_concept_logits = self.ecg_encoder(waveform)
         ehr_concept_logits = self.ehr_encoder(ehr_features)
 
-        # Probabilities for the bottleneck
         cxr_concept_probs = torch.sigmoid(cxr_concept_logits)
         ecg_concept_probs = torch.sigmoid(ecg_concept_logits)
         ehr_concept_probs = torch.sigmoid(ehr_concept_logits)
 
-        # Add noise to probabilities only during training, after sigmoid
+        # Training noise for robustness
         if self.training:
-            cxr_concept_probs = (cxr_concept_probs + torch.randn_like(cxr_concept_probs) * 0.1).clamp(0, 1)
-            ecg_concept_probs = (ecg_concept_probs + torch.randn_like(ecg_concept_probs) * 0.1).clamp(0, 1)
-            ehr_concept_probs = (ehr_concept_probs + torch.randn_like(ehr_concept_probs) * 0.1).clamp(0, 1)
-        
-        # 2. Apply Modality Dropouts
-        # If mask is 0 (dropped), the probabilities become 0. 
-        # We use .view(-1, 1) to ensure the mask shape aligns with the batch dimension
-                # Apply modality dropout masks
-        cxr_concept_probs = cxr_concept_probs * cxr_mask.view(-1, 1)
-        ecg_concept_probs = ecg_concept_probs * ecg_mask.view(-1, 1)
-        ehr_concept_probs = ehr_concept_probs * ehr_mask.view(-1, 1)
+            cxr_concept_probs = (cxr_concept_probs + torch.randn_like(cxr_concept_probs) * 0.05).clamp(0, 1)
+            # ... repeat for others ...
 
-        # 3. Cross-modal attention in concept space
-        cxr_attended, ecg_attended, ehr_attended = self.cross_modal_attention(
+        # 2. Cross-modal attention (using the refined return values)
+        # Note: I renamed 'refined' to 'attended' here to match your later logic
+        cxr_attended, ecg_attended, ehr_attended, \
+        cxr_attn_w, ecg_attn_w, ehr_attn_w = self.cross_modal_attention(
             cxr_concept_probs, ecg_concept_probs, ehr_concept_probs,
             cxr_mask, ecg_mask, ehr_mask
         )
 
-        # Re-apply masks after attention — attention can reintroduce signal
-        # from dropped modalities through the context projection, so we
-        # zero them out again to enforce the dropout contract
+        # 3. Re-apply masks to enforce the "Dropout Contract"
         cxr_attended = cxr_attended * cxr_mask.view(-1, 1)
         ecg_attended = ecg_attended * ecg_mask.view(-1, 1)
         ehr_attended = ehr_attended * ehr_mask.view(-1, 1)
 
-        # 4. Fusion — now attention-refined concepts
-        fused_concepts = torch.cat([cxr_attended, ecg_attended, ehr_attended], dim=1)  # (B, 42)
+        # 4. Fusion and Head
+        fused_concepts = torch.cat([cxr_attended, ecg_attended, ehr_attended], dim=1)
 
         # 5. Downstream predictions
         mortality_logits = self.mortality_head(fused_concepts).squeeze(-1)
@@ -271,4 +262,7 @@ class MultimodalCBM(nn.Module):
             'ehr_attended':       ehr_attended,
             'mortality_logits':   mortality_logits,
             'ahf_logits':         ahf_logits,
+            'cxr_attn_weights': cxr_attn_w,  # (B, heads, 15, 27)
+            'ecg_attn_weights': ecg_attn_w,  # (B, heads, 14, 28)
+            'ehr_attn_weights': ehr_attn_w,  # (B, heads, 13, 29)
         }

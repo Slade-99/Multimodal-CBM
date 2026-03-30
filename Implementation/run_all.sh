@@ -5,7 +5,7 @@
 set -e
 
 # These are the 7 exact experiments we established
-EXPERIMENTS=( "cxr_ehr" "cxr_ecg" "ehr_ecg")
+EXPERIMENTS=("trimodal")
 
 echo "Starting the 7-stage Multimodal CBM pipeline..."
 

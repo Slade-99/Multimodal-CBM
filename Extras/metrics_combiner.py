@@ -7,15 +7,19 @@ def parse_experiment_logs(file_paths):
     # Regex patterns for the specific fields
     patterns = {
         "Experiment": r"EVALUATING EXPERIMENT: ([\w_]+)",
-        "Mortality_AUROC": r"MORTALITY PREDICTION:.*?AUROC: ([\d.]+)",
-        "Mortality_AUPRC": r"MORTALITY PREDICTION:.*?AUPRC: ([\d.]+)",
-        "Mortality_F1": r"MORTALITY PREDICTION:.*?F1: ([\d.]+)",
-        "Mortality_ECE": r"MORTALITY PREDICTION:.*?ECE: ([\d.]+)",
-        "AHF_AUROC": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?AUROC: ([\d.]+)",
-        "AHF_AUPRC": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?AUPRC: ([\d.]+)",
-        "AHF_F1": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?F1: ([\d.]+)",
-        "AHF_ECE": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?ECE: ([\d.]+)",
-        "Overall_Concept_Accuracy": r"OVERALL CONCEPT PREDICTION ACCURACY: ([\d.]+)",
+        #"Mortality_AUROC": r"MORTALITY PREDICTION:.*?AUROC: ([\d.]+)",
+        #"Mortality_AUPRC": r"MORTALITY PREDICTION:.*?AUPRC: ([\d.]+)",
+        #"Mortality_F1": r"MORTALITY PREDICTION:.*?F1: ([\d.]+)",
+        "Mortality_Sensitivity": r"MORTALITY PREDICTION:.*?Sensitivity: ([\d.]+)",
+        "Mortality_Specificity": r"MORTALITY PREDICTION:.*?Specificity: ([\d.]+)",
+        #"Mortality_ECE": r"MORTALITY PREDICTION:.*?ECE: ([\d.]+)",
+        #"AHF_AUROC": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?AUROC: ([\d.]+)",
+        #"AHF_AUPRC": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?AUPRC: ([\d.]+)",
+        #"AHF_F1": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?F1: ([\d.]+)",
+        #"AHF_ECE": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?ECE: ([\d.]+)",
+        "AHF_Sensitivity": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?Sensitivity: ([\d.]+)",
+        "AHF_Specificity": r"ACUTE HEART FAILURE \(AHF\) PREDICTION:.*?Specificity: ([\d.]+)",
+        #"Overall_Concept_Accuracy": r"OVERALL CONCEPT PREDICTION ACCURACY: ([\d.]+)",
         
     }
 
