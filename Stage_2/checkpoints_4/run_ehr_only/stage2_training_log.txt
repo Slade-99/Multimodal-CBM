@@ -1,0 +1,57 @@
+2026-05-08 10:43:53,183 [INFO] Stage 2 — Experiment: ehr_only
+2026-05-08 10:43:53,183 [INFO] Arguments: {'experiment': 'ehr_only', 'exp_name': 'run_ehr_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 10:43:54,889 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 10:43:55,268 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ehr_concept_checkpoints/ehr_concept_debug/best_weights.pth
+2026-05-08 10:43:55,268 [INFO] Encoder frozen: 14,029 params | Task heads trainable: 1,986 params
+2026-05-08 10:49:45,920 [INFO] Stage 2 — Experiment: ehr_only
+2026-05-08 10:49:45,920 [INFO] Arguments: {'experiment': 'ehr_only', 'exp_name': 'run_ehr_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 10:49:47,601 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 10:49:47,986 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ehr_concept_checkpoints/ehr_concept_debug/best_weights.pth
+2026-05-08 10:49:47,986 [INFO]   All keys matched perfectly.
+2026-05-08 10:49:47,986 [INFO] Encoder frozen: 14,029 params | Task heads trainable: 1,986 params
+2026-05-08 10:52:45,957 [INFO] Stage 2 — Experiment: ehr_only
+2026-05-08 10:52:45,957 [INFO] Arguments: {'experiment': 'ehr_only', 'exp_name': 'run_ehr_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 10:52:47,554 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 10:52:47,907 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ehr_concept_checkpoints/ehr_concept_debug/best_weights.pth
+2026-05-08 10:52:47,907 [INFO]   All keys matched perfectly.
+2026-05-08 10:52:47,907 [INFO] Encoder frozen: 14,029 params | Task heads trainable: 1,986 params
+2026-05-08 10:56:11,861 [INFO] Epoch 1/50 | Train Loss: 1.0054 | Val Loss: 0.8578
+2026-05-08 10:56:11,861 [INFO]   Mortality  AUROC: 0.9250  AUPRC: 0.7242
+2026-05-08 10:56:11,862 [INFO]   AHF        AUROC: 0.6573  AUPRC: 0.4203
+2026-05-08 10:56:11,862 [INFO]   Combined AUROC: 0.7911  |  Concept AUROC: 0.9417
+2026-05-08 10:56:11,862 [INFO]   Per-concept AUROC:
+2026-05-08 10:56:11,862 [INFO]     tachycardia                   : 0.9994
+2026-05-08 10:56:11,862 [INFO]     tachypnea                     : 1.0000
+2026-05-08 10:56:11,862 [INFO]     abnormal_temp                 : 0.9974
+2026-05-08 10:56:11,862 [INFO]     hypotension                   : 0.9661
+2026-05-08 10:56:11,862 [INFO]     hypoxia                       : 0.9995
+2026-05-08 10:56:11,862 [INFO]     altered_mental                : 1.0000
+2026-05-08 10:56:11,862 [INFO]     elevated_creatinine           : 0.9773
+2026-05-08 10:56:11,862 [INFO]     elevated_bilirubin            : 0.9873
+2026-05-08 10:56:11,862 [INFO]     thrombocytopenia              : 0.9997
+2026-05-08 10:56:11,862 [INFO]     abnormal_wbc                  : 0.9945
+2026-05-08 10:56:11,862 [INFO]     hyperlactatemia               : 0.9974
+2026-05-08 10:56:11,862 [INFO]     elevated_bnp                  : 0.6104  <<< LOW
+2026-05-08 10:56:11,862 [INFO]     elevated_troponin             : 0.7131
+2026-05-08 10:56:11,865 [INFO]   [*] Best model saved (combined=0.7911)
+
+2026-05-08 10:59:40,716 [INFO] Epoch 2/50 | Train Loss: 0.8292 | Val Loss: 0.8336
+2026-05-08 10:59:40,717 [INFO]   Mortality  AUROC: 0.9307  AUPRC: 0.7319
+2026-05-08 10:59:40,717 [INFO]   AHF        AUROC: 0.6523  AUPRC: 0.4114
+2026-05-08 10:59:40,717 [INFO]   Combined AUROC: 0.7915  |  Concept AUROC: 0.9405
+2026-05-08 10:59:40,717 [INFO]   Per-concept AUROC:
+2026-05-08 10:59:40,717 [INFO]     tachycardia                   : 0.9988
+2026-05-08 10:59:40,717 [INFO]     tachypnea                     : 1.0000
+2026-05-08 10:59:40,717 [INFO]     abnormal_temp                 : 0.9976
+2026-05-08 10:59:40,717 [INFO]     hypotension                   : 0.9665
+2026-05-08 10:59:40,717 [INFO]     hypoxia                       : 0.9990
+2026-05-08 10:59:40,717 [INFO]     altered_mental                : 1.0000
+2026-05-08 10:59:40,717 [INFO]     elevated_creatinine           : 0.9692
+2026-05-08 10:59:40,717 [INFO]     elevated_bilirubin            : 0.9748
+2026-05-08 10:59:40,717 [INFO]     thrombocytopenia              : 0.9995
+2026-05-08 10:59:40,717 [INFO]     abnormal_wbc                  : 0.9895
+2026-05-08 10:59:40,717 [INFO]     hyperlactatemia               : 0.9944
+2026-05-08 10:59:40,717 [INFO]     elevated_bnp                  : 0.6217  <<< LOW
+2026-05-08 10:59:40,717 [INFO]     elevated_troponin             : 0.7159
+2026-05-08 10:59:40,720 [INFO]   [*] Best model saved (combined=0.7915)
+

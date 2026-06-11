@@ -1,0 +1,315 @@
+2026-05-08 11:15:05,155 [INFO] CXR Stage 2 — Task Head Training
+2026-05-08 11:15:05,155 [INFO] Arguments: {'save_dir': './cxr_stage2_checkpoints', 'exp_name': 'cxr_stage2', 'batch_size': 32, 'lr': 0.001, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 10}
+2026-05-08 11:15:17,745 [INFO] CXR Stage 2 — Task Head Training
+2026-05-08 11:15:17,745 [INFO] Arguments: {'save_dir': './cxr_stage2_checkpoints', 'exp_name': 'cxr_stage2', 'batch_size': 32, 'lr': 0.001, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 10}
+2026-05-08 11:15:19,293 [INFO] Dataloaders ready. Transform: XRV grayscale [-1024, 1024]
+2026-05-08 11:15:20,300 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/cxr_concept_checkpoints/xrv_resnet50_concept/best_weights.pth
+2026-05-08 11:15:20,300 [INFO]   All keys matched perfectly.
+2026-05-08 11:15:20,301 [INFO] Encoder frozen: 24,098,785 params | Task heads trainable: 2,114 params
+2026-05-08 11:22:12,962 [INFO] Epoch 1/50 | Train Loss: 0.9683 | Val Loss: 0.9107
+2026-05-08 11:22:12,963 [INFO]   Mortality  AUROC: 0.8002  AUPRC: 0.1941
+2026-05-08 11:22:12,963 [INFO]   AHF        AUROC: 0.7990  AUPRC: 0.5759
+2026-05-08 11:22:12,963 [INFO]   Combined: 0.7996 | Concept AUROC: 0.8016
+2026-05-08 11:22:12,963 [INFO]     lung_opacity                  : 0.7068
+2026-05-08 11:22:12,963 [INFO]     pleural_effusion              : 0.8650
+2026-05-08 11:22:12,963 [INFO]     support_tube                  : 0.8865
+2026-05-08 11:22:12,963 [INFO]     heart_enlarged                : 0.8095
+2026-05-08 11:22:12,963 [INFO]     lung_atelectasis              : 0.7136
+2026-05-08 11:22:12,963 [INFO]     pulmonary_edema               : 0.8498
+2026-05-08 11:22:12,963 [INFO]     support_line                  : 0.7455
+2026-05-08 11:22:12,963 [INFO]     vascular_congestion           : 0.7689
+2026-05-08 11:22:12,963 [INFO]     lungs_hyperinflated           : 0.8736
+2026-05-08 11:22:12,963 [INFO]     apical_pneumothorax           : 0.8016
+2026-05-08 11:22:12,963 [INFO]     hemidiaphragm_elevation       : 0.7458
+2026-05-08 11:22:12,963 [INFO]     rib_fractures                 : 0.7168
+2026-05-08 11:22:12,963 [INFO]     interstitial_markings         : 0.8320
+2026-05-08 11:22:12,963 [INFO]     volume_loss                   : 0.7608
+2026-05-08 11:22:12,963 [INFO]     atrium_leads                  : 0.9478
+2026-05-08 11:22:13,083 [INFO]   [*] Best model saved (combined=0.7996)
+
+2026-05-08 11:29:30,193 [INFO] Epoch 2/50 | Train Loss: 0.9402 | Val Loss: 0.9075
+2026-05-08 11:29:30,193 [INFO]   Mortality  AUROC: 0.8024  AUPRC: 0.1973
+2026-05-08 11:29:30,193 [INFO]   AHF        AUROC: 0.7990  AUPRC: 0.5802
+2026-05-08 11:29:30,193 [INFO]   Combined: 0.8007 | Concept AUROC: 0.8019
+2026-05-08 11:29:30,193 [INFO]     lung_opacity                  : 0.7069
+2026-05-08 11:29:30,193 [INFO]     pleural_effusion              : 0.8643
+2026-05-08 11:29:30,193 [INFO]     support_tube                  : 0.8857
+2026-05-08 11:29:30,193 [INFO]     heart_enlarged                : 0.8104
+2026-05-08 11:29:30,193 [INFO]     lung_atelectasis              : 0.7134
+2026-05-08 11:29:30,193 [INFO]     pulmonary_edema               : 0.8506
+2026-05-08 11:29:30,193 [INFO]     support_line                  : 0.7447
+2026-05-08 11:29:30,193 [INFO]     vascular_congestion           : 0.7691
+2026-05-08 11:29:30,193 [INFO]     lungs_hyperinflated           : 0.8748
+2026-05-08 11:29:30,193 [INFO]     apical_pneumothorax           : 0.8008
+2026-05-08 11:29:30,193 [INFO]     hemidiaphragm_elevation       : 0.7491
+2026-05-08 11:29:30,193 [INFO]     rib_fractures                 : 0.7164
+2026-05-08 11:29:30,193 [INFO]     interstitial_markings         : 0.8325
+2026-05-08 11:29:30,193 [INFO]     volume_loss                   : 0.7629
+2026-05-08 11:29:30,193 [INFO]     atrium_leads                  : 0.9470
+2026-05-08 11:29:30,357 [INFO]   [*] Best model saved (combined=0.8007)
+
+2026-05-08 11:40:27,184 [INFO] CXR Stage 2 — Task Head Training
+2026-05-08 11:40:27,184 [INFO] Arguments: {'save_dir': './cxr_stage2_checkpoints', 'exp_name': 'cxr_stage2', 'batch_size': 32, 'lr': 0.001, 'weight_decay': 0.0001, 'epochs': 30, 'patience_scheduler': 5, 'patience_early_stop': 3}
+2026-05-08 11:40:28,787 [INFO] Dataloaders ready. Transform: XRV grayscale [-1024, 1024]
+2026-05-08 11:40:29,717 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/cxr_concept_checkpoints/xrv_resnet50_concept/best_weights.pth
+2026-05-08 11:40:29,717 [INFO]   All keys matched perfectly.
+2026-05-08 11:40:29,718 [INFO] Encoder frozen: 24,098,785 params | Task heads trainable: 2,114 params
+2026-05-08 11:47:30,967 [INFO] Epoch 1/30 | Train Loss: 0.9783 | Val Loss: 0.9178
+2026-05-08 11:47:30,968 [INFO]   Mortality  AUROC: 0.7979  AUPRC: 0.1932
+2026-05-08 11:47:30,968 [INFO]   AHF        AUROC: 0.7958  AUPRC: 0.5742
+2026-05-08 11:47:30,968 [INFO]   Combined: 0.7969 | Concept AUROC: 0.8011
+2026-05-08 11:47:30,968 [INFO]     lung_opacity                  : 0.7064
+2026-05-08 11:47:30,968 [INFO]     pleural_effusion              : 0.8643
+2026-05-08 11:47:30,968 [INFO]     support_tube                  : 0.8858
+2026-05-08 11:47:30,968 [INFO]     heart_enlarged                : 0.8087
+2026-05-08 11:47:30,968 [INFO]     lung_atelectasis              : 0.7129
+2026-05-08 11:47:30,968 [INFO]     pulmonary_edema               : 0.8503
+2026-05-08 11:47:30,968 [INFO]     support_line                  : 0.7457
+2026-05-08 11:47:30,968 [INFO]     vascular_congestion           : 0.7680
+2026-05-08 11:47:30,968 [INFO]     lungs_hyperinflated           : 0.8731
+2026-05-08 11:47:30,968 [INFO]     apical_pneumothorax           : 0.8017
+2026-05-08 11:47:30,968 [INFO]     hemidiaphragm_elevation       : 0.7449
+2026-05-08 11:47:30,968 [INFO]     rib_fractures                 : 0.7187
+2026-05-08 11:47:30,968 [INFO]     interstitial_markings         : 0.8303
+2026-05-08 11:47:30,968 [INFO]     volume_loss                   : 0.7585
+2026-05-08 11:47:30,968 [INFO]     atrium_leads                  : 0.9477
+2026-05-08 11:47:31,165 [INFO]   [*] Best model saved (combined=0.7969)
+
+2026-05-08 11:54:43,263 [INFO] Epoch 2/30 | Train Loss: 0.9391 | Val Loss: 0.9094
+2026-05-08 11:54:43,347 [INFO]   Mortality  AUROC: 0.8017  AUPRC: 0.1975
+2026-05-08 11:54:43,347 [INFO]   AHF        AUROC: 0.7978  AUPRC: 0.5732
+2026-05-08 11:54:43,347 [INFO]   Combined: 0.7997 | Concept AUROC: 0.8011
+2026-05-08 11:54:43,347 [INFO]     lung_opacity                  : 0.7068
+2026-05-08 11:54:43,347 [INFO]     pleural_effusion              : 0.8661
+2026-05-08 11:54:43,347 [INFO]     support_tube                  : 0.8854
+2026-05-08 11:54:43,347 [INFO]     heart_enlarged                : 0.8103
+2026-05-08 11:54:43,347 [INFO]     lung_atelectasis              : 0.7132
+2026-05-08 11:54:43,347 [INFO]     pulmonary_edema               : 0.8511
+2026-05-08 11:54:43,347 [INFO]     support_line                  : 0.7446
+2026-05-08 11:54:43,348 [INFO]     vascular_congestion           : 0.7676
+2026-05-08 11:54:43,348 [INFO]     lungs_hyperinflated           : 0.8718
+2026-05-08 11:54:43,348 [INFO]     apical_pneumothorax           : 0.8008
+2026-05-08 11:54:43,348 [INFO]     hemidiaphragm_elevation       : 0.7471
+2026-05-08 11:54:43,348 [INFO]     rib_fractures                 : 0.7184
+2026-05-08 11:54:43,348 [INFO]     interstitial_markings         : 0.8308
+2026-05-08 11:54:43,348 [INFO]     volume_loss                   : 0.7566
+2026-05-08 11:54:43,348 [INFO]     atrium_leads                  : 0.9459
+2026-05-08 11:54:43,486 [INFO]   [*] Best model saved (combined=0.7997)
+
+2026-05-08 12:01:55,459 [INFO] Epoch 3/30 | Train Loss: 0.9300 | Val Loss: 0.9091
+2026-05-08 12:01:55,503 [INFO]   Mortality  AUROC: 0.8019  AUPRC: 0.1970
+2026-05-08 12:01:55,503 [INFO]   AHF        AUROC: 0.7999  AUPRC: 0.5819
+2026-05-08 12:01:55,503 [INFO]   Combined: 0.8009 | Concept AUROC: 0.8015
+2026-05-08 12:01:55,504 [INFO]     lung_opacity                  : 0.7058
+2026-05-08 12:01:55,504 [INFO]     pleural_effusion              : 0.8645
+2026-05-08 12:01:55,504 [INFO]     support_tube                  : 0.8856
+2026-05-08 12:01:55,504 [INFO]     heart_enlarged                : 0.8094
+2026-05-08 12:01:55,504 [INFO]     lung_atelectasis              : 0.7136
+2026-05-08 12:01:55,504 [INFO]     pulmonary_edema               : 0.8503
+2026-05-08 12:01:55,504 [INFO]     support_line                  : 0.7444
+2026-05-08 12:01:55,504 [INFO]     vascular_congestion           : 0.7687
+2026-05-08 12:01:55,504 [INFO]     lungs_hyperinflated           : 0.8739
+2026-05-08 12:01:55,504 [INFO]     apical_pneumothorax           : 0.8026
+2026-05-08 12:01:55,504 [INFO]     hemidiaphragm_elevation       : 0.7470
+2026-05-08 12:01:55,504 [INFO]     rib_fractures                 : 0.7191
+2026-05-08 12:01:55,504 [INFO]     interstitial_markings         : 0.8312
+2026-05-08 12:01:55,504 [INFO]     volume_loss                   : 0.7599
+2026-05-08 12:01:55,504 [INFO]     atrium_leads                  : 0.9467
+2026-05-08 12:01:55,650 [INFO]   [*] Best model saved (combined=0.8009)
+
+2026-05-08 12:09:09,372 [INFO] Epoch 4/30 | Train Loss: 0.9295 | Val Loss: 0.9087
+2026-05-08 12:09:09,374 [INFO]   Mortality  AUROC: 0.8010  AUPRC: 0.1968
+2026-05-08 12:09:09,374 [INFO]   AHF        AUROC: 0.7998  AUPRC: 0.5814
+2026-05-08 12:09:09,374 [INFO]   Combined: 0.8004 | Concept AUROC: 0.8011
+2026-05-08 12:09:09,374 [INFO]     lung_opacity                  : 0.7069
+2026-05-08 12:09:09,374 [INFO]     pleural_effusion              : 0.8650
+2026-05-08 12:09:09,374 [INFO]     support_tube                  : 0.8854
+2026-05-08 12:09:09,374 [INFO]     heart_enlarged                : 0.8095
+2026-05-08 12:09:09,374 [INFO]     lung_atelectasis              : 0.7126
+2026-05-08 12:09:09,374 [INFO]     pulmonary_edema               : 0.8509
+2026-05-08 12:09:09,374 [INFO]     support_line                  : 0.7449
+2026-05-08 12:09:09,374 [INFO]     vascular_congestion           : 0.7671
+2026-05-08 12:09:09,374 [INFO]     lungs_hyperinflated           : 0.8734
+2026-05-08 12:09:09,374 [INFO]     apical_pneumothorax           : 0.8012
+2026-05-08 12:09:09,374 [INFO]     hemidiaphragm_elevation       : 0.7464
+2026-05-08 12:09:09,374 [INFO]     rib_fractures                 : 0.7181
+2026-05-08 12:09:09,374 [INFO]     interstitial_markings         : 0.8317
+2026-05-08 12:09:09,374 [INFO]     volume_loss                   : 0.7569
+2026-05-08 12:09:09,374 [INFO]     atrium_leads                  : 0.9459
+2026-05-08 12:09:09,375 [INFO]   [!] No improvement for 1 epochs.
+
+2026-05-08 12:16:15,775 [INFO] Epoch 5/30 | Train Loss: 0.9256 | Val Loss: 0.9051
+2026-05-08 12:16:15,776 [INFO]   Mortality  AUROC: 0.8014  AUPRC: 0.1990
+2026-05-08 12:16:15,776 [INFO]   AHF        AUROC: 0.8022  AUPRC: 0.5870
+2026-05-08 12:16:15,776 [INFO]   Combined: 0.8018 | Concept AUROC: 0.8019
+2026-05-08 12:16:15,776 [INFO]     lung_opacity                  : 0.7063
+2026-05-08 12:16:15,776 [INFO]     pleural_effusion              : 0.8642
+2026-05-08 12:16:15,776 [INFO]     support_tube                  : 0.8857
+2026-05-08 12:16:15,776 [INFO]     heart_enlarged                : 0.8112
+2026-05-08 12:16:15,776 [INFO]     lung_atelectasis              : 0.7139
+2026-05-08 12:16:15,776 [INFO]     pulmonary_edema               : 0.8502
+2026-05-08 12:16:15,776 [INFO]     support_line                  : 0.7444
+2026-05-08 12:16:15,776 [INFO]     vascular_congestion           : 0.7695
+2026-05-08 12:16:15,776 [INFO]     lungs_hyperinflated           : 0.8753
+2026-05-08 12:16:15,776 [INFO]     apical_pneumothorax           : 0.8030
+2026-05-08 12:16:15,776 [INFO]     hemidiaphragm_elevation       : 0.7465
+2026-05-08 12:16:15,776 [INFO]     rib_fractures                 : 0.7168
+2026-05-08 12:16:15,776 [INFO]     interstitial_markings         : 0.8317
+2026-05-08 12:16:15,776 [INFO]     volume_loss                   : 0.7620
+2026-05-08 12:16:15,776 [INFO]     atrium_leads                  : 0.9476
+2026-05-08 12:16:15,953 [INFO]   [*] Best model saved (combined=0.8018)
+
+2026-05-08 12:23:26,411 [INFO] Epoch 6/30 | Train Loss: 0.9277 | Val Loss: 0.9036
+2026-05-08 12:23:26,412 [INFO]   Mortality  AUROC: 0.8027  AUPRC: 0.1983
+2026-05-08 12:23:26,412 [INFO]   AHF        AUROC: 0.8015  AUPRC: 0.5841
+2026-05-08 12:23:26,412 [INFO]   Combined: 0.8021 | Concept AUROC: 0.8018
+2026-05-08 12:23:26,412 [INFO]     lung_opacity                  : 0.7068
+2026-05-08 12:23:26,412 [INFO]     pleural_effusion              : 0.8643
+2026-05-08 12:23:26,412 [INFO]     support_tube                  : 0.8855
+2026-05-08 12:23:26,412 [INFO]     heart_enlarged                : 0.8100
+2026-05-08 12:23:26,412 [INFO]     lung_atelectasis              : 0.7134
+2026-05-08 12:23:26,412 [INFO]     pulmonary_edema               : 0.8503
+2026-05-08 12:23:26,412 [INFO]     support_line                  : 0.7444
+2026-05-08 12:23:26,412 [INFO]     vascular_congestion           : 0.7695
+2026-05-08 12:23:26,412 [INFO]     lungs_hyperinflated           : 0.8748
+2026-05-08 12:23:26,412 [INFO]     apical_pneumothorax           : 0.8003
+2026-05-08 12:23:26,412 [INFO]     hemidiaphragm_elevation       : 0.7479
+2026-05-08 12:23:26,412 [INFO]     rib_fractures                 : 0.7184
+2026-05-08 12:23:26,412 [INFO]     interstitial_markings         : 0.8325
+2026-05-08 12:23:26,412 [INFO]     volume_loss                   : 0.7613
+2026-05-08 12:23:26,412 [INFO]     atrium_leads                  : 0.9481
+2026-05-08 12:23:26,539 [INFO]   [*] Best model saved (combined=0.8021)
+
+2026-05-08 12:30:50,843 [INFO] Epoch 7/30 | Train Loss: 0.9305 | Val Loss: 0.9054
+2026-05-08 12:30:50,844 [INFO]   Mortality  AUROC: 0.8007  AUPRC: 0.1974
+2026-05-08 12:30:50,844 [INFO]   AHF        AUROC: 0.8018  AUPRC: 0.5838
+2026-05-08 12:30:50,844 [INFO]   Combined: 0.8012 | Concept AUROC: 0.8015
+2026-05-08 12:30:50,844 [INFO]     lung_opacity                  : 0.7060
+2026-05-08 12:30:50,844 [INFO]     pleural_effusion              : 0.8645
+2026-05-08 12:30:50,844 [INFO]     support_tube                  : 0.8852
+2026-05-08 12:30:50,844 [INFO]     heart_enlarged                : 0.8097
+2026-05-08 12:30:50,844 [INFO]     lung_atelectasis              : 0.7133
+2026-05-08 12:30:50,844 [INFO]     pulmonary_edema               : 0.8500
+2026-05-08 12:30:50,844 [INFO]     support_line                  : 0.7458
+2026-05-08 12:30:50,844 [INFO]     vascular_congestion           : 0.7683
+2026-05-08 12:30:50,844 [INFO]     lungs_hyperinflated           : 0.8733
+2026-05-08 12:30:50,844 [INFO]     apical_pneumothorax           : 0.8018
+2026-05-08 12:30:50,844 [INFO]     hemidiaphragm_elevation       : 0.7460
+2026-05-08 12:30:50,844 [INFO]     rib_fractures                 : 0.7182
+2026-05-08 12:30:50,844 [INFO]     interstitial_markings         : 0.8336
+2026-05-08 12:30:50,844 [INFO]     volume_loss                   : 0.7604
+2026-05-08 12:30:50,844 [INFO]     atrium_leads                  : 0.9469
+2026-05-08 12:30:50,844 [INFO]   [!] No improvement for 1 epochs.
+
+2026-05-08 12:38:13,940 [INFO] Epoch 8/30 | Train Loss: 0.9245 | Val Loss: 0.9036
+2026-05-08 12:38:13,940 [INFO]   Mortality  AUROC: 0.8014  AUPRC: 0.1994
+2026-05-08 12:38:13,940 [INFO]   AHF        AUROC: 0.8023  AUPRC: 0.5856
+2026-05-08 12:38:13,940 [INFO]   Combined: 0.8019 | Concept AUROC: 0.8012
+2026-05-08 12:38:13,940 [INFO]     lung_opacity                  : 0.7063
+2026-05-08 12:38:13,940 [INFO]     pleural_effusion              : 0.8654
+2026-05-08 12:38:13,941 [INFO]     support_tube                  : 0.8855
+2026-05-08 12:38:13,941 [INFO]     heart_enlarged                : 0.8099
+2026-05-08 12:38:13,941 [INFO]     lung_atelectasis              : 0.7137
+2026-05-08 12:38:13,941 [INFO]     pulmonary_edema               : 0.8500
+2026-05-08 12:38:13,941 [INFO]     support_line                  : 0.7447
+2026-05-08 12:38:13,941 [INFO]     vascular_congestion           : 0.7697
+2026-05-08 12:38:13,941 [INFO]     lungs_hyperinflated           : 0.8744
+2026-05-08 12:38:13,941 [INFO]     apical_pneumothorax           : 0.7996
+2026-05-08 12:38:13,941 [INFO]     hemidiaphragm_elevation       : 0.7473
+2026-05-08 12:38:13,941 [INFO]     rib_fractures                 : 0.7130
+2026-05-08 12:38:13,941 [INFO]     interstitial_markings         : 0.8288
+2026-05-08 12:38:13,941 [INFO]     volume_loss                   : 0.7615
+2026-05-08 12:38:13,941 [INFO]     atrium_leads                  : 0.9482
+2026-05-08 12:38:13,941 [INFO]   [!] No improvement for 2 epochs.
+
+2026-05-08 12:45:39,261 [INFO] Epoch 9/30 | Train Loss: 0.9280 | Val Loss: 0.9055
+2026-05-08 12:45:39,262 [INFO]   Mortality  AUROC: 0.8023  AUPRC: 0.1985
+2026-05-08 12:45:39,262 [INFO]   AHF        AUROC: 0.8020  AUPRC: 0.5842
+2026-05-08 12:45:39,262 [INFO]   Combined: 0.8022 | Concept AUROC: 0.8016
+2026-05-08 12:45:39,262 [INFO]     lung_opacity                  : 0.7063
+2026-05-08 12:45:39,262 [INFO]     pleural_effusion              : 0.8650
+2026-05-08 12:45:39,262 [INFO]     support_tube                  : 0.8856
+2026-05-08 12:45:39,262 [INFO]     heart_enlarged                : 0.8101
+2026-05-08 12:45:39,262 [INFO]     lung_atelectasis              : 0.7132
+2026-05-08 12:45:39,262 [INFO]     pulmonary_edema               : 0.8509
+2026-05-08 12:45:39,262 [INFO]     support_line                  : 0.7455
+2026-05-08 12:45:39,262 [INFO]     vascular_congestion           : 0.7682
+2026-05-08 12:45:39,262 [INFO]     lungs_hyperinflated           : 0.8734
+2026-05-08 12:45:39,262 [INFO]     apical_pneumothorax           : 0.8018
+2026-05-08 12:45:39,262 [INFO]     hemidiaphragm_elevation       : 0.7457
+2026-05-08 12:45:39,262 [INFO]     rib_fractures                 : 0.7171
+2026-05-08 12:45:39,262 [INFO]     interstitial_markings         : 0.8327
+2026-05-08 12:45:39,262 [INFO]     volume_loss                   : 0.7604
+2026-05-08 12:45:39,262 [INFO]     atrium_leads                  : 0.9476
+2026-05-08 12:45:39,432 [INFO]   [*] Best model saved (combined=0.8022)
+
+2026-05-08 12:53:00,585 [INFO] Epoch 10/30 | Train Loss: 0.9298 | Val Loss: 0.9051
+2026-05-08 12:53:00,585 [INFO]   Mortality  AUROC: 0.8021  AUPRC: 0.1989
+2026-05-08 12:53:00,585 [INFO]   AHF        AUROC: 0.8009  AUPRC: 0.5829
+2026-05-08 12:53:00,585 [INFO]   Combined: 0.8015 | Concept AUROC: 0.8014
+2026-05-08 12:53:00,585 [INFO]     lung_opacity                  : 0.7064
+2026-05-08 12:53:00,585 [INFO]     pleural_effusion              : 0.8642
+2026-05-08 12:53:00,585 [INFO]     support_tube                  : 0.8858
+2026-05-08 12:53:00,585 [INFO]     heart_enlarged                : 0.8095
+2026-05-08 12:53:00,585 [INFO]     lung_atelectasis              : 0.7135
+2026-05-08 12:53:00,585 [INFO]     pulmonary_edema               : 0.8501
+2026-05-08 12:53:00,585 [INFO]     support_line                  : 0.7450
+2026-05-08 12:53:00,585 [INFO]     vascular_congestion           : 0.7688
+2026-05-08 12:53:00,585 [INFO]     lungs_hyperinflated           : 0.8740
+2026-05-08 12:53:00,585 [INFO]     apical_pneumothorax           : 0.8010
+2026-05-08 12:53:00,585 [INFO]     hemidiaphragm_elevation       : 0.7443
+2026-05-08 12:53:00,585 [INFO]     rib_fractures                 : 0.7156
+2026-05-08 12:53:00,585 [INFO]     interstitial_markings         : 0.8316
+2026-05-08 12:53:00,585 [INFO]     volume_loss                   : 0.7623
+2026-05-08 12:53:00,585 [INFO]     atrium_leads                  : 0.9485
+2026-05-08 12:53:00,585 [INFO]   [!] No improvement for 1 epochs.
+
+2026-05-08 13:00:20,303 [INFO] Epoch 11/30 | Train Loss: 0.9219 | Val Loss: 0.9064
+2026-05-08 13:00:20,329 [INFO]   Mortality  AUROC: 0.8023  AUPRC: 0.1986
+2026-05-08 13:00:20,329 [INFO]   AHF        AUROC: 0.8026  AUPRC: 0.5852
+2026-05-08 13:00:20,329 [INFO]   Combined: 0.8024 | Concept AUROC: 0.8016
+2026-05-08 13:00:20,329 [INFO]     lung_opacity                  : 0.7068
+2026-05-08 13:00:20,329 [INFO]     pleural_effusion              : 0.8644
+2026-05-08 13:00:20,329 [INFO]     support_tube                  : 0.8857
+2026-05-08 13:00:20,329 [INFO]     heart_enlarged                : 0.8104
+2026-05-08 13:00:20,329 [INFO]     lung_atelectasis              : 0.7133
+2026-05-08 13:00:20,329 [INFO]     pulmonary_edema               : 0.8508
+2026-05-08 13:00:20,329 [INFO]     support_line                  : 0.7451
+2026-05-08 13:00:20,329 [INFO]     vascular_congestion           : 0.7686
+2026-05-08 13:00:20,329 [INFO]     lungs_hyperinflated           : 0.8748
+2026-05-08 13:00:20,329 [INFO]     apical_pneumothorax           : 0.8007
+2026-05-08 13:00:20,330 [INFO]     hemidiaphragm_elevation       : 0.7459
+2026-05-08 13:00:20,330 [INFO]     rib_fractures                 : 0.7182
+2026-05-08 13:00:20,330 [INFO]     interstitial_markings         : 0.8315
+2026-05-08 13:00:20,330 [INFO]     volume_loss                   : 0.7613
+2026-05-08 13:00:20,330 [INFO]     atrium_leads                  : 0.9472
+2026-05-08 13:00:20,510 [INFO]   [*] Best model saved (combined=0.8024)
+
+2026-05-08 13:07:37,404 [INFO] Epoch 12/30 | Train Loss: 0.9254 | Val Loss: 0.9052
+2026-05-08 13:07:37,404 [INFO]   Mortality  AUROC: 0.8018  AUPRC: 0.2003
+2026-05-08 13:07:37,404 [INFO]   AHF        AUROC: 0.8018  AUPRC: 0.5834
+2026-05-08 13:07:37,404 [INFO]   Combined: 0.8018 | Concept AUROC: 0.8017
+2026-05-08 13:07:37,404 [INFO]     lung_opacity                  : 0.7068
+2026-05-08 13:07:37,405 [INFO]     pleural_effusion              : 0.8647
+2026-05-08 13:07:37,405 [INFO]     support_tube                  : 0.8858
+2026-05-08 13:07:37,405 [INFO]     heart_enlarged                : 0.8101
+2026-05-08 13:07:37,405 [INFO]     lung_atelectasis              : 0.7135
+2026-05-08 13:07:37,405 [INFO]     pulmonary_edema               : 0.8512
+2026-05-08 13:07:37,405 [INFO]     support_line                  : 0.7443
+2026-05-08 13:07:37,405 [INFO]     vascular_congestion           : 0.7692
+2026-05-08 13:07:37,405 [INFO]     lungs_hyperinflated           : 0.8745
+2026-05-08 13:07:37,405 [INFO]     apical_pneumothorax           : 0.8020
+2026-05-08 13:07:37,405 [INFO]     hemidiaphragm_elevation       : 0.7486
+2026-05-08 13:07:37,405 [INFO]     rib_fractures                 : 0.7187
+2026-05-08 13:07:37,405 [INFO]     interstitial_markings         : 0.8318
+2026-05-08 13:07:37,405 [INFO]     volume_loss                   : 0.7585
+2026-05-08 13:07:37,405 [INFO]     atrium_leads                  : 0.9463
+2026-05-08 13:07:37,405 [INFO]   [!] No improvement for 1 epochs.
+
+2026-05-08 13:09:13,705 [INFO] CXR Stage 2 — Task Head Training
+2026-05-08 13:09:13,705 [INFO] Arguments: {'save_dir': './cxr_stage2_checkpoints', 'exp_name': 'cxr_stage2', 'batch_size': 32, 'lr': 0.001, 'weight_decay': 0.0001, 'epochs': 30, 'patience_scheduler': 5, 'patience_early_stop': 3}
+2026-05-08 13:09:15,314 [INFO] Dataloaders ready. Transform: XRV grayscale [-1024, 1024]
+2026-05-08 13:09:16,284 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/cxr_concept_checkpoints/xrv_resnet50_concept/best_weights.pth
+2026-05-08 13:09:16,284 [WARNING]   Missing keys (448): ['enc.first_conv.conv.weight', 'enc.first_conv.conv.bias', 'enc.first_bn.weight', 'enc.first_bn.bias', 'enc.first_bn.running_mean']...
+2026-05-08 13:09:16,284 [WARNING]   Unexpected keys (337): ['backbone.op_threshs', 'backbone.model.conv1.weight', 'backbone.model.bn1.weight', 'backbone.model.bn1.bias', 'backbone.model.bn1.running_mean']...
+2026-05-08 13:09:16,285 [INFO] Encoder frozen: 30,679,614 params | Task heads trainable: 2,050 params

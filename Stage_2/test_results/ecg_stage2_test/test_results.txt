@@ -1,0 +1,37 @@
+2026-05-16 21:48:40,220 [INFO] === ECG Stage 2 Test Evaluation ===
+2026-05-16 21:48:42,201 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_ecg_only/best_stage2_weights.pth
+2026-05-16 21:49:00,406 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 21:49:00,406 [INFO] 
+[MORTALITY]
+2026-05-16 21:49:00,406 [INFO] AUROC       : 0.5732
+2026-05-16 21:49:00,406 [INFO] AUPRC       : 0.0975
+2026-05-16 21:49:00,406 [INFO] F1          : 0.1521
+2026-05-16 21:49:00,406 [INFO] Sensitivity : 0.4344
+2026-05-16 21:49:00,406 [INFO] Specificity : 0.6903
+2026-05-16 21:49:00,406 [INFO] 
+[AHF]
+2026-05-16 21:49:00,406 [INFO] AUROC       : 0.6814
+2026-05-16 21:49:00,406 [INFO] AUPRC       : 0.4660
+2026-05-16 21:49:00,406 [INFO] F1          : 0.4849
+2026-05-16 21:49:00,406 [INFO] Sensitivity : 0.5038
+2026-05-16 21:49:00,406 [INFO] Specificity : 0.7953
+2026-05-16 21:49:00,406 [INFO] 
+[CONCEPTS]
+2026-05-16 21:49:00,406 [INFO] Mean Concept AUROC : 0.9596
+2026-05-16 21:49:00,406 [INFO] 
+Per-concept AUROC:
+2026-05-16 21:49:00,406 [INFO] myocardial_infarction         : 0.9306
+2026-05-16 21:49:00,406 [INFO] left_axis_deviation           : 0.9762
+2026-05-16 21:49:00,406 [INFO] myocardial_ischemia           : 0.9421
+2026-05-16 21:49:00,406 [INFO] sinus_bradycardia             : 0.9931
+2026-05-16 21:49:00,406 [INFO] atrial_fibrillation           : 0.9805
+2026-05-16 21:49:00,406 [INFO] low_qrs_voltage               : 0.9146
+2026-05-16 21:49:00,406 [INFO] sinus_tachycardia             : 0.9952
+2026-05-16 21:49:00,406 [INFO] right_bundle_branch_block     : 0.9947
+2026-05-16 21:49:00,406 [INFO] left_ventricular_hypertrophy  : 0.9002
+2026-05-16 21:49:00,406 [INFO] prolonged_qt_interval         : 0.9453
+2026-05-16 21:49:00,406 [INFO] left_bundle_branch_block      : 0.9907
+2026-05-16 21:49:00,406 [INFO] iv_conduction_defect          : 0.9720
+2026-05-16 21:49:00,406 [INFO] pacemaker_rhythm              : 0.9840
+2026-05-16 21:49:00,406 [INFO] left_atrial_abnormality       : 0.9144

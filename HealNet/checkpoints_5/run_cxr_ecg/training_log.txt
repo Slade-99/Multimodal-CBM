@@ -1,0 +1,57 @@
+2026-05-16 16:05:40,114 [INFO] Experiment       : cxr_ecg
+2026-05-16 16:05:40,114 [INFO] Active modalities: ['cxr', 'ecg']
+2026-05-16 16:05:40,114 [INFO] Arguments        : {'experiment': 'cxr_ecg', 'exp_name': 'run_cxr_ecg', 'save_dir': './checkpoints_5', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 30, 'patience_scheduler': 5, 'patience_early_stop': 3, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-16 16:05:41,822 [INFO] Dataloaders ready.
+2026-05-16 16:05:42,800 [INFO] Parameters — Total: 55,396,641 | Trainable: 618,242 | Frozen (encoders): 54,778,399
+2026-05-16 16:14:34,835 [INFO] Epoch 1/30 | Train Loss: 0.9889 | Val Loss: 0.9678
+2026-05-16 16:14:34,844 [INFO]   Mortality  AUROC: 0.7781  AUPRC: 0.1813
+2026-05-16 16:14:34,844 [INFO]   AHF        AUROC: 0.8133  AUPRC: 0.6052
+2026-05-16 16:14:34,844 [INFO]   Combined AUROC : 0.7957
+2026-05-16 16:14:35,086 [INFO]   [*] Best model saved (combined=0.7957)
+
+2026-05-16 16:23:25,573 [INFO] Epoch 2/30 | Train Loss: 0.9367 | Val Loss: 0.9435
+2026-05-16 16:23:25,582 [INFO]   Mortality  AUROC: 0.7868  AUPRC: 0.1972
+2026-05-16 16:23:25,582 [INFO]   AHF        AUROC: 0.8274  AUPRC: 0.6388
+2026-05-16 16:23:25,582 [INFO]   Combined AUROC : 0.8071
+2026-05-16 16:23:25,928 [INFO]   [*] Best model saved (combined=0.8071)
+
+2026-05-16 16:32:16,497 [INFO] Epoch 3/30 | Train Loss: 0.9323 | Val Loss: 0.9285
+2026-05-16 16:32:16,506 [INFO]   Mortality  AUROC: 0.7910  AUPRC: 0.1979
+2026-05-16 16:32:16,506 [INFO]   AHF        AUROC: 0.8293  AUPRC: 0.6369
+2026-05-16 16:32:16,506 [INFO]   Combined AUROC : 0.8102
+2026-05-16 16:32:16,852 [INFO]   [*] Best model saved (combined=0.8102)
+
+2026-05-16 16:41:07,232 [INFO] Epoch 4/30 | Train Loss: 0.9256 | Val Loss: 0.9547
+2026-05-16 16:41:07,241 [INFO]   Mortality  AUROC: 0.7883  AUPRC: 0.1986
+2026-05-16 16:41:07,241 [INFO]   AHF        AUROC: 0.8269  AUPRC: 0.6397
+2026-05-16 16:41:07,241 [INFO]   Combined AUROC : 0.8076
+2026-05-16 16:41:07,241 [INFO]   [!] No improvement for 1 epochs.
+
+2026-05-16 16:49:55,290 [INFO] Epoch 5/30 | Train Loss: 0.9218 | Val Loss: 0.9242
+2026-05-16 16:49:55,291 [INFO]   Mortality  AUROC: 0.7974  AUPRC: 0.2046
+2026-05-16 16:49:55,291 [INFO]   AHF        AUROC: 0.8301  AUPRC: 0.6425
+2026-05-16 16:49:55,291 [INFO]   Combined AUROC : 0.8138
+2026-05-16 16:49:55,620 [INFO]   [*] Best model saved (combined=0.8138)
+
+2026-05-16 16:58:44,006 [INFO] Epoch 6/30 | Train Loss: 0.9190 | Val Loss: 0.9349
+2026-05-16 16:58:44,006 [INFO]   Mortality  AUROC: 0.7827  AUPRC: 0.1938
+2026-05-16 16:58:44,006 [INFO]   AHF        AUROC: 0.8305  AUPRC: 0.6408
+2026-05-16 16:58:44,006 [INFO]   Combined AUROC : 0.8066
+2026-05-16 16:58:44,007 [INFO]   [!] No improvement for 1 epochs.
+
+2026-05-16 17:07:32,217 [INFO] Epoch 7/30 | Train Loss: 0.9177 | Val Loss: 1.0100
+2026-05-16 17:07:32,218 [INFO]   Mortality  AUROC: 0.7964  AUPRC: 0.2058
+2026-05-16 17:07:32,218 [INFO]   AHF        AUROC: 0.8294  AUPRC: 0.6430
+2026-05-16 17:07:32,218 [INFO]   Combined AUROC : 0.8129
+2026-05-16 17:07:32,218 [INFO]   [!] No improvement for 2 epochs.
+
+2026-05-16 17:16:19,228 [INFO] Epoch 8/30 | Train Loss: 0.9153 | Val Loss: 0.9219
+2026-05-16 17:16:19,228 [INFO]   Mortality  AUROC: 0.7948  AUPRC: 0.2030
+2026-05-16 17:16:19,228 [INFO]   AHF        AUROC: 0.8281  AUPRC: 0.6399
+2026-05-16 17:16:19,228 [INFO]   Combined AUROC : 0.8114
+2026-05-16 17:16:19,228 [INFO]   [!] No improvement for 3 epochs.
+
+2026-05-16 17:16:19,228 [INFO] Early stopping triggered.
+2026-05-16 17:16:19,228 [INFO] 
+Training complete. Best combined AUROC: 0.8138
+2026-05-16 17:16:19,228 [INFO] Weights saved to : ./checkpoints_5/run_cxr_ecg/best_fusion_weights.pth

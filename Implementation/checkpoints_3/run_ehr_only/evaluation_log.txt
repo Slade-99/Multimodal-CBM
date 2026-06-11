@@ -1,0 +1,32 @@
+--- EVALUATING EXPERIMENT: ehr_only ---
+Model weights loaded successfully.
+
+[Phase 1] Tuning Thresholds on Validation Set...
+Locked Mortality Threshold: 0.80
+Locked AHF Threshold: 0.49
+
+[Phase 2] Evaluating on Test Set...
+
+================ FINAL TEST RESULTS ================
+MORTALITY PREDICTION:
+  AUROC: 0.9533
+  AUPRC: 0.8220
+  F1: 0.7645
+  Sensitivity: 0.7084
+  Specificity: 0.9895
+  ECE: 0.0830
+
+ACUTE HEART FAILURE (AHF) PREDICTION:
+  AUROC: 0.7824
+  AUPRC: 0.5452
+  F1: 0.5660
+  Sensitivity: 0.7064
+  Specificity: 0.7185
+  ECE: 0.1719
+
+OVERALL CONCEPT PREDICTION ACCURACY: 0.2478
+====================================================
+
+[Phase 3] Generating Plots...
+Plots and raw curve data saved to ./checkpoints_3/run_ehr_only/plots
+--- EVALUATING EXPERIMENT: ehr_only ---

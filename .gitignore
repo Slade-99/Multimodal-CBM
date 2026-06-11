@@ -8,6 +8,7 @@ __pycache__/
 venv/
 .env/
 Datasets/
+Others/
 runs/
 wandb/
 logs/
@@ -36,3 +37,5 @@ Extras/
 *.tmp 
 *.bak
 *.swp
+Self_ReadME.txt
+ECGFounder

@@ -1,0 +1,34 @@
+2026-05-17 12:00:47,317 [INFO] Starting CXR UniModal Test
+2026-05-17 12:00:47,317 [INFO] Threshold strategy: f1
+2026-05-17 12:00:47,317 [INFO] Bootstrap samples : 1000
+2026-05-17 12:00:49,521 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_cxr_only/best_stage2_weights.pth
+2026-05-17 12:00:49,521 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-17 12:02:32,317 [INFO]   Mortality threshold : 0.7119
+2026-05-17 12:02:32,318 [INFO]   AHF threshold       : 0.5388
+2026-05-17 12:02:32,318 [INFO] 
+Running inference on test set...
+2026-05-17 12:04:19,342 [INFO] 
+============================================================
+2026-05-17 12:04:19,351 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-17 12:04:19,351 [INFO] ============================================================
+2026-05-17 12:04:19,351 [INFO] 
+  [MORTALITY]  threshold = 0.7119
+2026-05-17 12:05:06,992 [INFO]   AUROC       : 0.7941  (95% CI 0.7807–0.8067)
+2026-05-17 12:05:40,582 [INFO]   AUPRC       : 0.1966  (95% CI 0.1773–0.2137)
+2026-05-17 12:06:08,336 [INFO]   F1          : 0.2824  (95% CI 0.2613–0.3032)
+2026-05-17 12:06:18,352 [INFO]   Sensitivity : 0.4251  (95% CI 0.3950–0.4552)
+2026-05-17 12:06:28,368 [INFO]   Specificity : 0.8853  (95% CI 0.8801–0.8904)
+2026-05-17 12:06:28,368 [INFO]   Prevalence  : 0.067  (pos=1021, neg=14114, total=15135)
+2026-05-17 12:06:28,368 [INFO] 
+  [AHF]  threshold = 0.5388
+2026-05-17 12:07:16,258 [INFO]   AUROC       : 0.7969  (95% CI 0.7894–0.8046)
+2026-05-17 12:07:49,889 [INFO]   AUPRC       : 0.5741  (95% CI 0.5565–0.5897)
+2026-05-17 12:08:20,696 [INFO]   F1          : 0.5739  (95% CI 0.5622–0.5857)
+2026-05-17 12:08:31,368 [INFO]   Sensitivity : 0.7441  (95% CI 0.7297–0.7584)
+2026-05-17 12:08:42,074 [INFO]   Specificity : 0.6972  (95% CI 0.6890–0.7055)
+2026-05-17 12:08:42,074 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11157, total=15135)
+2026-05-17 12:08:42,075 [INFO] 
+  Combined AUROC (mean): 0.7955
+2026-05-17 12:08:42,075 [INFO] 
+Done.

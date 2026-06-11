@@ -1,0 +1,62 @@
+--- EVALUATING EXPERIMENT: cxr_only ---
+Model weights loaded successfully.
+
+[Phase 1] Tuning Thresholds on Validation Set...
+Locked Mortality Threshold: 0.75
+Locked AHF Threshold: 0.63
+
+[Phase 2] Evaluating on Test Set...
+
+================ FINAL TEST RESULTS ================
+MORTALITY PREDICTION:
+  AUROC: 0.8222
+  AUPRC: 0.2496
+  F1: 0.3161
+  Sensitivity: 0.5127
+  Specificity: 0.8747
+  ECE: 0.2370
+
+ACUTE HEART FAILURE (AHF) PREDICTION:
+  AUROC: 0.8229
+  AUPRC: 0.6287
+  F1: 0.6099
+  Sensitivity: 0.6812
+  Specificity: 0.8030
+  ECE: 0.2008
+
+OVERALL CONCEPT PREDICTION ACCURACY: 0.3295
+====================================================
+
+[Phase 3] Generating Plots...
+Plots and raw curve data saved to ./checkpoints_3/run_cxr_only/plots
+--- EVALUATING EXPERIMENT: cxr_only ---
+Model weights loaded successfully.
+
+[Phase 1] Tuning Thresholds on Validation Set...
+Locked Mortality Threshold: 0.74
+Locked AHF Threshold: 0.68
+
+[Phase 2] Evaluating on Test Set...
+
+================ FINAL TEST RESULTS ================
+MORTALITY PREDICTION:
+  AUROC: 0.8273
+  AUPRC: 0.2526
+  F1: 0.3248
+  Sensitivity: 0.5568
+  Specificity: 0.8645
+  ECE: 0.2601
+
+ACUTE HEART FAILURE (AHF) PREDICTION:
+  AUROC: 0.8226
+  AUPRC: 0.6308
+  F1: 0.6026
+  Sensitivity: 0.6737
+  Specificity: 0.7996
+  ECE: 0.2258
+
+OVERALL CONCEPT PREDICTION ACCURACY: 0.3182
+====================================================
+
+[Phase 3] Generating Plots...
+Plots and raw curve data saved to ./checkpoints_3/run_cxr_only/plots

@@ -1,0 +1,32 @@
+2026-05-08 10:38:52,952 [INFO] Stage 2 — Experiment: ecg_only
+2026-05-08 10:38:52,952 [INFO] Arguments: {'experiment': 'ecg_only', 'exp_name': 'run_ecg_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 10:38:54,578 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 10:38:55,416 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ecg_concept_checkpoints/ecg_concept_debug/best_weights.pth
+2026-05-08 10:38:55,416 [WARNING]   Missing keys (448): ['enc.first_conv.conv.weight', 'enc.first_conv.conv.bias', 'enc.first_bn.weight', 'enc.first_bn.bias', 'enc.first_bn.running_mean']...
+2026-05-08 10:38:55,416 [WARNING]   Unexpected keys (509): ['first_conv.conv.weight', 'first_conv.conv.bias', 'first_bn.weight', 'first_bn.bias', 'first_bn.running_mean']...
+2026-05-08 10:38:55,418 [INFO] Encoder frozen: 30,679,614 params | Task heads trainable: 2,050 params
+2026-05-08 10:41:34,903 [INFO] Stage 2 — Experiment: ecg_only
+2026-05-08 10:41:34,903 [INFO] Arguments: {'experiment': 'ecg_only', 'exp_name': 'run_ecg_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 10:41:36,473 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 10:41:37,335 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ecg_concept_checkpoints/ecg_concept_debug/best_weights.pth
+2026-05-08 10:41:37,335 [WARNING]   Missing keys (448): ['enc.first_conv.conv.weight', 'enc.first_conv.conv.bias', 'enc.first_bn.weight', 'enc.first_bn.bias', 'enc.first_bn.running_mean']...
+2026-05-08 10:41:37,335 [WARNING]   Unexpected keys (509): ['first_conv.conv.weight', 'first_conv.conv.bias', 'first_bn.weight', 'first_bn.bias', 'first_bn.running_mean']...
+2026-05-08 10:41:37,336 [INFO] Encoder frozen: 30,679,614 params | Task heads trainable: 2,050 params
+2026-05-08 11:00:26,789 [INFO] Stage 2 — Experiment: ecg_only
+2026-05-08 11:00:26,789 [INFO] Arguments: {'experiment': 'ecg_only', 'exp_name': 'run_ecg_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 11:00:28,428 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 11:00:29,284 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ecg_concept_checkpoints/ecg_concept_debug/best_weights.pth
+2026-05-08 11:00:29,292 [INFO]   All keys matched perfectly.
+2026-05-08 11:00:29,294 [INFO] Encoder frozen: 30,679,614 params | Task heads trainable: 2,050 params
+2026-05-08 11:01:43,566 [INFO] Stage 2 — Experiment: ecg_only
+2026-05-08 11:01:43,599 [INFO] Arguments: {'experiment': 'ecg_only', 'exp_name': 'run_ecg_only', 'save_dir': './checkpoints_4', 'batch_size': 32, 'lr_finetune': 0.0001, 'lr_e2e': 1e-05, 'weight_decay': 0.0001, 'epochs': 50, 'patience_scheduler': 5, 'patience_early_stop': 5, 'alpha_concept': 10, 'beta_target': 1.0}
+2026-05-08 11:01:45,320 [INFO] Dataloaders ready. CXR transform: ImageNet RGB (CXR unused)
+2026-05-08 11:01:46,259 [INFO] Loaded Stage 1 weights from /home/azwad/Works/Multimodal-CBM/ecg_concept_checkpoints/ecg_concept_debug/best_weights.pth
+2026-05-08 11:01:46,259 [INFO]   All keys matched perfectly.
+2026-05-08 11:01:46,260 [INFO] Encoder frozen: 30,679,614 params | Task heads trainable: 2,050 params
+2026-05-08 11:05:16,673 [INFO] Epoch 1/50 | Train Loss: 1.1317 | Val Loss: 1.1008
+2026-05-08 11:05:16,673 [INFO]   Mortality  AUROC: 0.5715  AUPRC: 0.0906
+2026-05-08 11:05:16,673 [INFO]   AHF        AUROC: 0.6852  AUPRC: 0.4904
+2026-05-08 11:05:16,673 [INFO]   Combined AUROC: 0.6284  |  Concept AUROC: 0.9598
+2026-05-08 11:05:16,822 [INFO]   [*] Best model saved (combined=0.6284)
+

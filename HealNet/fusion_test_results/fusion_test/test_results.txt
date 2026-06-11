@@ -1,0 +1,419 @@
+2026-05-16 21:55:45,748 [INFO] Experiment: trimodal
+2026-05-16 21:55:45,748 [INFO] Modalities: ['cxr', 'ecg', 'ehr']
+2026-05-16 21:55:48,513 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_trimodal/best_fusion_weights.pth
+2026-05-16 21:57:58,544 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 21:57:58,553 [INFO] 
+[MORTALITY]
+2026-05-16 21:57:58,553 [INFO] AUROC       : 0.9446
+2026-05-16 21:57:58,553 [INFO] AUPRC       : 0.7612
+2026-05-16 21:57:58,553 [INFO] F1          : 0.6730
+2026-05-16 21:57:58,553 [INFO] Sensitivity : 0.6605
+2026-05-16 21:57:58,553 [INFO] Specificity : 0.9781
+2026-05-16 21:57:58,553 [INFO] 
+[AHF]
+2026-05-16 21:57:58,553 [INFO] AUROC       : 0.8386
+2026-05-16 21:57:58,553 [INFO] AUPRC       : 0.6551
+2026-05-16 21:57:58,553 [INFO] F1          : 0.6214
+2026-05-16 21:57:58,553 [INFO] Sensitivity : 0.7858
+2026-05-16 21:57:58,553 [INFO] Specificity : 0.7350
+2026-05-16 21:57:58,553 [INFO] 
+Combined AUROC : 0.8916
+2026-05-16 21:59:26,627 [INFO] Experiment: cxr_ecg
+2026-05-16 21:59:26,628 [INFO] Modalities: ['cxr', 'ecg']
+2026-05-16 21:59:29,471 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ecg/best_fusion_weights.pth
+2026-05-16 22:01:43,057 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 22:01:43,066 [INFO] 
+[MORTALITY]
+2026-05-16 22:01:43,066 [INFO] AUROC       : 0.7881
+2026-05-16 22:01:43,066 [INFO] AUPRC       : 0.2092
+2026-05-16 22:01:43,066 [INFO] F1          : 0.2347
+2026-05-16 22:01:43,066 [INFO] Sensitivity : 0.7965
+2026-05-16 22:01:43,066 [INFO] Specificity : 0.6387
+2026-05-16 22:01:43,066 [INFO] 
+[AHF]
+2026-05-16 22:01:43,066 [INFO] AUROC       : 0.8245
+2026-05-16 22:01:43,066 [INFO] AUPRC       : 0.6230
+2026-05-16 22:01:43,066 [INFO] F1          : 0.6086
+2026-05-16 22:01:43,066 [INFO] Sensitivity : 0.7416
+2026-05-16 22:01:43,066 [INFO] Specificity : 0.7521
+2026-05-16 22:01:43,066 [INFO] 
+Combined AUROC : 0.8063
+2026-05-16 22:02:56,312 [INFO] Experiment: cxr_ehr
+2026-05-16 22:02:56,312 [INFO] Modalities: ['cxr', 'ehr']
+2026-05-16 22:02:58,664 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ehr/best_fusion_weights.pth
+2026-05-16 22:04:57,075 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 22:04:57,077 [INFO] 
+[MORTALITY]
+2026-05-16 22:04:57,077 [INFO] AUROC       : 0.9481
+2026-05-16 22:04:57,077 [INFO] AUPRC       : 0.7723
+2026-05-16 22:04:57,077 [INFO] F1          : 0.6545
+2026-05-16 22:04:57,077 [INFO] Sensitivity : 0.6996
+2026-05-16 22:04:57,077 [INFO] Specificity : 0.9683
+2026-05-16 22:04:57,077 [INFO] 
+[AHF]
+2026-05-16 22:04:57,077 [INFO] AUROC       : 0.8163
+2026-05-16 22:04:57,077 [INFO] AUPRC       : 0.6140
+2026-05-16 22:04:57,077 [INFO] F1          : 0.6001
+2026-05-16 22:04:57,077 [INFO] Sensitivity : 0.7278
+2026-05-16 22:04:57,077 [INFO] Specificity : 0.7513
+2026-05-16 22:04:57,077 [INFO] 
+Combined AUROC : 0.8822
+2026-05-16 22:08:42,211 [INFO] Experiment: ecg_ehr
+2026-05-16 22:08:42,211 [INFO] Modalities: ['ecg', 'ehr']
+2026-05-16 22:08:44,425 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_ecg_ehr/best_fusion_weights.pth
+2026-05-16 22:09:12,363 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 22:09:12,363 [INFO] 
+[MORTALITY]
+2026-05-16 22:09:12,363 [INFO] AUROC       : 0.9414
+2026-05-16 22:09:12,363 [INFO] AUPRC       : 0.7646
+2026-05-16 22:09:12,363 [INFO] F1          : 0.6803
+2026-05-16 22:09:12,363 [INFO] Sensitivity : 0.7006
+2026-05-16 22:09:12,363 [INFO] Specificity : 0.9740
+2026-05-16 22:09:12,363 [INFO] 
+[AHF]
+2026-05-16 22:09:12,363 [INFO] AUROC       : 0.7646
+2026-05-16 22:09:12,363 [INFO] AUPRC       : 0.5557
+2026-05-16 22:09:12,363 [INFO] F1          : 0.5399
+2026-05-16 22:09:12,363 [INFO] Sensitivity : 0.5566
+2026-05-16 22:09:12,363 [INFO] Specificity : 0.8199
+2026-05-16 22:09:12,363 [INFO] 
+Combined AUROC : 0.8530
+2026-05-16 23:03:55,420 [INFO] Experiment        : trimodal
+2026-05-16 23:03:55,421 [INFO] Modalities        : ['cxr', 'ecg', 'ehr']
+2026-05-16 23:03:55,421 [INFO] Threshold strategy: f1
+2026-05-16 23:03:55,421 [INFO] Bootstrap samples : 1000
+2026-05-16 23:03:55,421 [INFO] Device            : cuda
+2026-05-16 23:03:58,285 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_trimodal/best_fusion_weights.pth
+2026-05-16 23:03:58,286 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-16 23:06:07,699 [INFO]   Mortality threshold : 0.5913
+2026-05-16 23:06:07,701 [INFO]   AHF threshold       : 0.6190
+2026-05-16 23:06:07,701 [INFO] 
+Running inference on test set...
+2026-05-16 23:08:21,006 [INFO] 
+============================================================
+2026-05-16 23:08:21,006 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-16 23:08:21,006 [INFO] ============================================================
+2026-05-16 23:08:21,007 [INFO] 
+  [MORTALITY]  threshold = 0.5913
+2026-05-16 23:09:06,002 [INFO]   AUROC       : 0.9446  (95% CI 0.9375–0.9520)
+2026-05-16 23:09:38,006 [INFO]   AUPRC       : 0.7612  (95% CI 0.7379–0.7859)
+2026-05-16 23:10:04,614 [INFO]   F1          : 0.6984  (95% CI 0.6744–0.7212)
+2026-05-16 23:10:14,386 [INFO]   Sensitivity : 0.6389  (95% CI 0.6128–0.6690)
+2026-05-16 23:10:24,072 [INFO]   Specificity : 0.9862  (95% CI 0.9841–0.9879)
+2026-05-16 23:10:24,072 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-16 23:10:24,073 [INFO] 
+  [AHF]  threshold = 0.6190
+2026-05-16 23:11:12,059 [INFO]   AUROC       : 0.8386  (95% CI 0.8312–0.8452)
+2026-05-16 23:11:45,982 [INFO]   AUPRC       : 0.6551  (95% CI 0.6393–0.6703)
+2026-05-16 23:12:16,914 [INFO]   F1          : 0.6198  (95% CI 0.6070–0.6320)
+2026-05-16 23:12:27,571 [INFO]   Sensitivity : 0.6694  (95% CI 0.6549–0.6852)
+2026-05-16 23:12:38,250 [INFO]   Specificity : 0.8251  (95% CI 0.8172–0.8315)
+2026-05-16 23:12:38,250 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-16 23:12:38,250 [INFO] 
+  Combined AUROC (mean): 0.8916
+2026-05-16 23:12:38,250 [INFO] 
+============================================================
+2026-05-16 23:12:38,250 [INFO] Done.
+2026-05-16 23:16:41,056 [INFO] Experiment        : cxr_ecg
+2026-05-16 23:16:41,056 [INFO] Modalities        : ['cxr', 'ecg']
+2026-05-16 23:16:41,056 [INFO] Threshold strategy: f1
+2026-05-16 23:16:41,056 [INFO] Bootstrap samples : 1000
+2026-05-16 23:16:41,056 [INFO] Device            : cuda
+2026-05-16 23:16:43,821 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ecg/best_fusion_weights.pth
+2026-05-16 23:16:43,821 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-16 23:18:55,324 [INFO]   Mortality threshold : 0.7938
+2026-05-16 23:18:55,333 [INFO]   AHF threshold       : 0.5301
+2026-05-16 23:18:55,333 [INFO] 
+Running inference on test set...
+2026-05-16 23:21:09,791 [INFO] 
+============================================================
+2026-05-16 23:21:09,800 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-16 23:21:09,800 [INFO] ============================================================
+2026-05-16 23:21:09,800 [INFO] 
+  [MORTALITY]  threshold = 0.7938
+2026-05-16 23:21:56,223 [INFO]   AUROC       : 0.7881  (95% CI 0.7752–0.8003)
+2026-05-16 23:22:29,393 [INFO]   AUPRC       : 0.2092  (95% CI 0.1878–0.2301)
+2026-05-16 23:22:58,008 [INFO]   F1          : 0.2819  (95% CI 0.2597–0.3019)
+2026-05-16 23:23:08,359 [INFO]   Sensitivity : 0.4530  (95% CI 0.4235–0.4832)
+2026-05-16 23:23:18,448 [INFO]   Specificity : 0.8725  (95% CI 0.8670–0.8779)
+2026-05-16 23:23:18,448 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-16 23:23:18,448 [INFO] 
+  [AHF]  threshold = 0.5301
+2026-05-16 23:24:06,853 [INFO]   AUROC       : 0.8245  (95% CI 0.8166–0.8314)
+2026-05-16 23:24:41,028 [INFO]   AUPRC       : 0.6230  (95% CI 0.6074–0.6394)
+2026-05-16 23:25:11,511 [INFO]   F1          : 0.6084  (95% CI 0.5973–0.6205)
+2026-05-16 23:25:22,153 [INFO]   Sensitivity : 0.7074  (95% CI 0.6938–0.7226)
+2026-05-16 23:25:32,716 [INFO]   Specificity : 0.7797  (95% CI 0.7724–0.7879)
+2026-05-16 23:25:32,716 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-16 23:25:32,717 [INFO] 
+  Combined AUROC (mean): 0.8063
+2026-05-16 23:25:32,717 [INFO] 
+============================================================
+2026-05-16 23:25:32,717 [INFO] Done.
+2026-05-17 11:43:42,289 [INFO] Experiment        : cxr_ehr
+2026-05-17 11:43:42,289 [INFO] Modalities        : ['cxr', 'ehr']
+2026-05-17 11:43:42,289 [INFO] Threshold strategy: f1
+2026-05-17 11:43:42,289 [INFO] Bootstrap samples : 1000
+2026-05-17 11:43:42,289 [INFO] Device            : cuda
+2026-05-17 11:43:44,837 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ehr/best_fusion_weights.pth
+2026-05-17 11:43:44,837 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-17 11:45:17,721 [INFO]   Mortality threshold : 0.7086
+2026-05-17 11:45:17,722 [INFO]   AHF threshold       : 0.4943
+2026-05-17 11:45:17,722 [INFO] 
+Running inference on test set...
+2026-05-17 11:46:54,608 [INFO] 
+============================================================
+2026-05-17 11:46:54,608 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-17 11:46:54,608 [INFO] ============================================================
+2026-05-17 11:46:54,609 [INFO] 
+  [MORTALITY]  threshold = 0.7086
+2026-05-17 11:47:40,343 [INFO]   AUROC       : 0.9481  (95% CI 0.9412–0.9552)
+2026-05-17 11:48:13,068 [INFO]   AUPRC       : 0.7723  (95% CI 0.7501–0.7958)
+2026-05-17 11:48:40,336 [INFO]   F1          : 0.7007  (95% CI 0.6791–0.7260)
+2026-05-17 11:48:50,283 [INFO]   Sensitivity : 0.6585  (95% CI 0.6319–0.6894)
+2026-05-17 11:49:00,237 [INFO]   Specificity : 0.9840  (95% CI 0.9820–0.9859)
+2026-05-17 11:49:00,237 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-17 11:49:00,237 [INFO] 
+  [AHF]  threshold = 0.4943
+2026-05-17 11:49:48,352 [INFO]   AUROC       : 0.8163  (95% CI 0.8090–0.8234)
+2026-05-17 11:50:22,616 [INFO]   AUPRC       : 0.6140  (95% CI 0.5963–0.6293)
+2026-05-17 11:50:53,107 [INFO]   F1          : 0.5987  (95% CI 0.5865–0.6105)
+2026-05-17 11:51:03,746 [INFO]   Sensitivity : 0.7328  (95% CI 0.7183–0.7456)
+2026-05-17 11:51:14,316 [INFO]   Specificity : 0.7452  (95% CI 0.7371–0.7534)
+2026-05-17 11:51:14,316 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-17 11:51:14,316 [INFO] 
+  Combined AUROC (mean): 0.8822
+2026-05-17 11:51:14,316 [INFO] 
+============================================================
+2026-05-17 11:51:14,316 [INFO] Done.
+2026-05-17 11:53:57,174 [INFO] Experiment        : ecg_ehr
+2026-05-17 11:53:57,174 [INFO] Modalities        : ['ecg', 'ehr']
+2026-05-17 11:53:57,174 [INFO] Threshold strategy: f1
+2026-05-17 11:53:57,174 [INFO] Bootstrap samples : 1000
+2026-05-17 11:53:57,174 [INFO] Device            : cuda
+2026-05-17 11:53:59,718 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_ecg_ehr/best_fusion_weights.pth
+2026-05-17 11:53:59,718 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-17 11:54:27,281 [INFO]   Mortality threshold : 0.7781
+2026-05-17 11:54:27,281 [INFO]   AHF threshold       : 0.3795
+2026-05-17 11:54:27,281 [INFO] 
+Running inference on test set...
+2026-05-17 11:54:54,758 [INFO] 
+============================================================
+2026-05-17 11:54:54,758 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-17 11:54:54,758 [INFO] ============================================================
+2026-05-17 11:54:54,758 [INFO] 
+  [MORTALITY]  threshold = 0.7781
+2026-05-17 11:55:40,377 [INFO]   AUROC       : 0.9414  (95% CI 0.9331–0.9494)
+2026-05-17 11:56:12,866 [INFO]   AUPRC       : 0.7646  (95% CI 0.7399–0.7890)
+2026-05-17 11:56:39,834 [INFO]   F1          : 0.7037  (95% CI 0.6794–0.7281)
+2026-05-17 11:56:49,897 [INFO]   Sensitivity : 0.6321  (95% CI 0.6003–0.6622)
+2026-05-17 11:56:59,852 [INFO]   Specificity : 0.9881  (95% CI 0.9863–0.9899)
+2026-05-17 11:56:59,852 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-17 11:56:59,853 [INFO] 
+  [AHF]  threshold = 0.3795
+2026-05-17 11:57:47,643 [INFO]   AUROC       : 0.7646  (95% CI 0.7555–0.7729)
+2026-05-17 11:58:20,688 [INFO]   AUPRC       : 0.5557  (95% CI 0.5383–0.5711)
+2026-05-17 11:58:51,708 [INFO]   F1          : 0.5587  (95% CI 0.5477–0.5712)
+2026-05-17 11:59:02,788 [INFO]   Sensitivity : 0.7144  (95% CI 0.7008–0.7290)
+2026-05-17 11:59:13,900 [INFO]   Specificity : 0.6996  (95% CI 0.6910–0.7081)
+2026-05-17 11:59:13,900 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-17 11:59:13,900 [INFO] 
+  Combined AUROC (mean): 0.8530
+2026-05-17 11:59:13,900 [INFO] 
+============================================================
+2026-05-17 11:59:13,900 [INFO] Done.
+2026-05-18 10:16:37,553 [INFO] Experiment        : cxr_ehr
+2026-05-18 10:16:37,553 [INFO] Modalities        : ['cxr', 'ehr']
+2026-05-18 10:16:37,553 [INFO] Threshold strategy: f1
+2026-05-18 10:16:37,553 [INFO] Bootstrap samples : 1000
+2026-05-18 10:16:37,553 [INFO] Device            : cuda
+2026-05-18 10:16:39,933 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ehr/best_fusion_weights.pth
+2026-05-18 10:16:39,933 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-18 10:18:27,209 [INFO]   Mortality threshold : 0.7086
+2026-05-18 10:18:27,210 [INFO]   AHF threshold       : 0.4943
+2026-05-18 10:18:27,210 [INFO] 
+Running inference on test set...
+2026-05-18 10:20:21,651 [INFO] 
+============================================================
+2026-05-18 10:20:21,651 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-18 10:20:21,651 [INFO] ============================================================
+2026-05-18 10:20:21,651 [INFO] 
+  [MORTALITY]  threshold = 0.7086
+2026-05-18 10:21:06,720 [INFO]   AUROC       : 0.9481  (95% CI 0.9412–0.9552)
+2026-05-18 10:21:39,015 [INFO]   AUPRC       : 0.7723  (95% CI 0.7501–0.7958)
+2026-05-18 10:22:05,778 [INFO]   F1          : 0.7007  (95% CI 0.6791–0.7260)
+2026-05-18 10:22:15,703 [INFO]   Sensitivity : 0.6585  (95% CI 0.6319–0.6894)
+2026-05-18 10:22:25,525 [INFO]   Specificity : 0.9840  (95% CI 0.9820–0.9859)
+2026-05-18 10:22:25,525 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-18 10:22:25,525 [INFO] 
+  [AHF]  threshold = 0.4943
+2026-05-18 10:23:13,680 [INFO]   AUROC       : 0.8163  (95% CI 0.8090–0.8234)
+2026-05-18 10:23:47,429 [INFO]   AUPRC       : 0.6140  (95% CI 0.5963–0.6293)
+2026-05-18 10:24:17,851 [INFO]   F1          : 0.5987  (95% CI 0.5865–0.6105)
+2026-05-18 10:24:28,465 [INFO]   Sensitivity : 0.7328  (95% CI 0.7183–0.7456)
+2026-05-18 10:24:39,053 [INFO]   Specificity : 0.7452  (95% CI 0.7371–0.7534)
+2026-05-18 10:24:39,053 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-18 10:24:39,053 [INFO] 
+  Combined AUROC (mean): 0.8822
+2026-05-18 10:24:39,053 [INFO] 
+============================================================
+2026-05-18 10:24:39,053 [INFO] Done.
+2026-05-18 10:28:56,500 [INFO] Experiment        : trimodal
+2026-05-18 10:28:56,500 [INFO] Modalities        : ['cxr', 'ecg', 'ehr']
+2026-05-18 10:28:56,500 [INFO] Threshold strategy: f1
+2026-05-18 10:28:56,500 [INFO] Bootstrap samples : 1000
+2026-05-18 10:28:56,500 [INFO] Device            : cuda
+2026-05-18 10:28:59,503 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_trimodal/best_fusion_weights.pth
+2026-05-18 10:28:59,503 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-18 10:31:05,946 [INFO]   Mortality threshold : 0.5913
+2026-05-18 10:31:05,946 [INFO]   AHF threshold       : 0.6190
+2026-05-18 10:31:05,946 [INFO] 
+Running inference on test set...
+2026-05-18 10:33:17,112 [INFO] 
+============================================================
+2026-05-18 10:33:17,112 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-18 10:33:17,112 [INFO] ============================================================
+2026-05-18 10:33:17,112 [INFO] 
+  [MORTALITY]  threshold = 0.5913
+2026-05-18 10:34:03,530 [INFO]   AUROC       : 0.9446  (95% CI 0.9375–0.9520)
+2026-05-18 10:34:36,404 [INFO]   AUPRC       : 0.7612  (95% CI 0.7379–0.7859)
+2026-05-18 10:35:03,231 [INFO]   F1          : 0.6984  (95% CI 0.6744–0.7212)
+2026-05-18 10:35:13,306 [INFO]   Sensitivity : 0.6389  (95% CI 0.6128–0.6690)
+2026-05-18 10:35:23,212 [INFO]   Specificity : 0.9862  (95% CI 0.9841–0.9879)
+2026-05-18 10:35:23,212 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-18 10:35:23,212 [INFO] 
+  [AHF]  threshold = 0.6190
+2026-05-18 10:36:12,548 [INFO]   AUROC       : 0.8386  (95% CI 0.8312–0.8452)
+2026-05-18 10:36:46,572 [INFO]   AUPRC       : 0.6551  (95% CI 0.6393–0.6703)
+2026-05-18 10:37:16,640 [INFO]   F1          : 0.6198  (95% CI 0.6070–0.6320)
+2026-05-18 10:37:27,341 [INFO]   Sensitivity : 0.6694  (95% CI 0.6549–0.6852)
+2026-05-18 10:37:38,043 [INFO]   Specificity : 0.8251  (95% CI 0.8172–0.8315)
+2026-05-18 10:37:38,043 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-18 10:37:38,043 [INFO] 
+  Combined AUROC (mean): 0.8916
+2026-05-18 10:37:38,043 [INFO] 
+============================================================
+2026-05-18 10:37:38,043 [INFO] DELONG TEST vs CXR_EHR
+2026-05-18 10:37:38,043 [INFO] ============================================================
+2026-05-18 10:37:38,755 [INFO] Compare weights loaded: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ehr/best_fusion_weights.pth
+2026-05-18 10:39:29,898 [INFO] 
+  [Mortality]
+  trimodal AUC = 0.9446
+  cxr_ehr AUC = 0.9481
+  z = -3.323,  p = 0.0009  (✓ significant)
+2026-05-18 10:39:31,083 [INFO] 
+  [AHF]
+  trimodal AUC = 0.8386
+  cxr_ehr AUC = 0.8163
+  z = 9.829,  p = 0.0000  (✓ significant)
+2026-05-18 10:39:31,083 [INFO] 
+============================================================
+2026-05-18 10:39:31,083 [INFO] Done.
+2026-05-22 19:15:29,562 [INFO] Experiment        : trimodal
+2026-05-22 19:15:29,562 [INFO] Modalities        : ['cxr', 'ecg', 'ehr']
+2026-05-22 19:15:29,562 [INFO] Threshold strategy: f1
+2026-05-22 19:15:29,562 [INFO] Bootstrap samples : 1000
+2026-05-22 19:15:29,562 [INFO] Device            : cpu
+2026-05-22 19:15:32,291 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_trimodal/best_fusion_weights.pth
+2026-05-22 19:15:32,291 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-22 19:22:40,111 [INFO] Experiment        : trimodal
+2026-05-22 19:22:40,111 [INFO] Modalities        : ['cxr', 'ecg', 'ehr']
+2026-05-22 19:22:40,111 [INFO] Threshold strategy: f1
+2026-05-22 19:22:40,111 [INFO] Bootstrap samples : 1000
+2026-05-22 19:22:40,112 [INFO] Device            : cuda
+2026-05-22 19:22:43,385 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_trimodal/best_fusion_weights.pth
+2026-05-22 19:22:43,385 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-22 19:24:31,564 [INFO]   Mortality threshold : 0.5913
+2026-05-22 19:24:31,565 [INFO]   AHF threshold       : 0.6190
+2026-05-22 19:24:31,565 [INFO] 
+Running inference on test set...
+2026-05-22 19:26:23,183 [INFO] 
+============================================================
+2026-05-22 19:26:23,183 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-22 19:26:23,183 [INFO] ============================================================
+2026-05-22 19:26:23,183 [INFO] 
+  [MORTALITY]  threshold = 0.5913
+2026-05-22 19:27:12,648 [INFO]   AUROC       : 0.9446  (95% CI 0.9375–0.9520)
+2026-05-22 19:27:47,655 [INFO]   AUPRC       : 0.7612  (95% CI 0.7379–0.7859)
+2026-05-22 19:28:16,054 [INFO]   F1          : 0.6984  (95% CI 0.6744–0.7212)
+2026-05-22 19:28:26,623 [INFO]   Sensitivity : 0.6389  (95% CI 0.6128–0.6690)
+2026-05-22 19:28:37,100 [INFO]   Specificity : 0.9862  (95% CI 0.9841–0.9879)
+2026-05-22 19:28:37,100 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-22 19:28:37,100 [INFO] 
+  [AHF]  threshold = 0.6190
+2026-05-22 19:29:27,653 [INFO]   AUROC       : 0.8386  (95% CI 0.8312–0.8452)
+2026-05-22 19:30:02,948 [INFO]   AUPRC       : 0.6551  (95% CI 0.6393–0.6703)
+2026-05-22 19:30:34,292 [INFO]   F1          : 0.6198  (95% CI 0.6070–0.6320)
+2026-05-22 19:30:45,351 [INFO]   Sensitivity : 0.6694  (95% CI 0.6549–0.6852)
+2026-05-22 19:30:56,424 [INFO]   Specificity : 0.8251  (95% CI 0.8172–0.8315)
+2026-05-22 19:30:56,424 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-22 19:30:56,424 [INFO] 
+  Combined AUROC (mean): 0.8916
+2026-05-22 19:30:56,424 [INFO] 
+============================================================
+2026-05-22 19:30:56,424 [INFO] DELONG TEST vs CXR_EHR
+2026-05-22 19:30:56,424 [INFO] ============================================================
+2026-05-22 19:46:58,127 [INFO] Experiment        : trimodal
+2026-05-22 19:46:58,127 [INFO] Modalities        : ['cxr', 'ecg', 'ehr']
+2026-05-22 19:46:58,127 [INFO] Threshold strategy: f1
+2026-05-22 19:46:58,127 [INFO] Bootstrap samples : 1000
+2026-05-22 19:46:58,127 [INFO] Device            : cuda
+2026-05-22 19:47:01,002 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_trimodal/best_fusion_weights.pth
+2026-05-22 19:47:01,002 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-22 19:48:47,605 [INFO]   Mortality threshold : 0.5913
+2026-05-22 19:48:47,606 [INFO]   AHF threshold       : 0.6190
+2026-05-22 19:48:47,606 [INFO] 
+Running inference on test set...
+2026-05-22 19:50:37,658 [INFO] 
+============================================================
+2026-05-22 19:50:37,658 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-22 19:50:37,658 [INFO] ============================================================
+2026-05-22 19:50:37,658 [INFO] 
+  [MORTALITY]  threshold = 0.5913
+2026-05-22 19:51:23,145 [INFO]   AUROC       : 0.9446  (95% CI 0.9375–0.9520)
+2026-05-22 19:51:55,667 [INFO]   AUPRC       : 0.7612  (95% CI 0.7379–0.7859)
+2026-05-22 19:52:22,333 [INFO]   F1          : 0.6984  (95% CI 0.6744–0.7212)
+2026-05-22 19:52:32,397 [INFO]   Sensitivity : 0.6389  (95% CI 0.6128–0.6690)
+2026-05-22 19:52:42,279 [INFO]   Specificity : 0.9862  (95% CI 0.9841–0.9879)
+2026-05-22 19:52:42,279 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-22 19:52:42,279 [INFO] 
+  [AHF]  threshold = 0.6190
+2026-05-22 19:53:31,243 [INFO]   AUROC       : 0.8386  (95% CI 0.8312–0.8452)
+2026-05-22 19:54:05,475 [INFO]   AUPRC       : 0.6551  (95% CI 0.6393–0.6703)
+2026-05-22 19:54:35,802 [INFO]   F1          : 0.6198  (95% CI 0.6070–0.6320)
+2026-05-22 19:54:46,525 [INFO]   Sensitivity : 0.6694  (95% CI 0.6549–0.6852)
+2026-05-22 19:54:57,218 [INFO]   Specificity : 0.8251  (95% CI 0.8172–0.8315)
+2026-05-22 19:54:57,218 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-22 19:54:57,218 [INFO] 
+  Combined AUROC (mean): 0.8916
+2026-05-22 19:54:57,218 [INFO] 
+============================================================
+2026-05-22 19:54:57,218 [INFO] DELONG TEST vs CXR_EHR
+2026-05-22 19:54:57,218 [INFO] ============================================================
+2026-05-22 19:54:57,911 [INFO] Compare weights loaded: /home/azwad/Works/Multimodal-CBM/HealNet/checkpoints_5/run_cxr_ehr/best_fusion_weights.pth
+2026-05-22 19:56:31,866 [INFO] 
+  [Mortality]
+  trimodal AUC = 0.9446
+  cxr_ehr AUC = 0.9481
+  z = -3.323,  p = 0.0009  (✓ significant)
+2026-05-22 19:56:33,057 [INFO] 
+  [AHF]
+  trimodal AUC = 0.8386
+  cxr_ehr AUC = 0.8163
+  z = 9.829,  p = 0.0000  (✓ significant)
+2026-05-22 19:56:33,057 [INFO] 
+============================================================
+2026-05-22 19:56:33,057 [INFO] Done.

@@ -1,0 +1,36 @@
+2026-05-16 21:49:35,598 [INFO] === EHR Stage 2 Test Evaluation ===
+2026-05-16 21:49:36,231 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_ehr_only/best_stage2_weights.pth
+2026-05-16 21:49:37,294 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 21:49:37,294 [INFO] 
+[MORTALITY]
+2026-05-16 21:49:37,294 [INFO] AUROC       : 0.9343
+2026-05-16 21:49:37,294 [INFO] AUPRC       : 0.7564
+2026-05-16 21:49:37,294 [INFO] F1          : 0.6197
+2026-05-16 21:49:37,294 [INFO] Sensitivity : 0.7407
+2026-05-16 21:49:37,294 [INFO] Specificity : 0.9530
+2026-05-16 21:49:37,294 [INFO] 
+[AHF]
+2026-05-16 21:49:37,294 [INFO] AUROC       : 0.6565
+2026-05-16 21:49:37,294 [INFO] AUPRC       : 0.4041
+2026-05-16 21:49:37,294 [INFO] F1          : 0.4543
+2026-05-16 21:49:37,294 [INFO] Sensitivity : 0.5566
+2026-05-16 21:49:37,294 [INFO] Specificity : 0.6815
+2026-05-16 21:49:37,294 [INFO] 
+[CONCEPTS]
+2026-05-16 21:49:37,294 [INFO] Mean Concept AUROC : 0.9388
+2026-05-16 21:49:37,294 [INFO] 
+Per-concept AUROC:
+2026-05-16 21:49:37,294 [INFO] tachycardia                   : 0.9993
+2026-05-16 21:49:37,294 [INFO] tachypnea                     : 0.9999
+2026-05-16 21:49:37,294 [INFO] abnormal_temp                 : 0.9740
+2026-05-16 21:49:37,294 [INFO] hypotension                   : 0.9595
+2026-05-16 21:49:37,294 [INFO] hypoxia                       : 0.9996
+2026-05-16 21:49:37,294 [INFO] altered_mental                : 1.0000
+2026-05-16 21:49:37,294 [INFO] elevated_creatinine           : 0.9703
+2026-05-16 21:49:37,295 [INFO] elevated_bilirubin            : 0.9705
+2026-05-16 21:49:37,295 [INFO] thrombocytopenia              : 0.9996
+2026-05-16 21:49:37,295 [INFO] abnormal_wbc                  : 0.9868
+2026-05-16 21:49:37,295 [INFO] hyperlactatemia               : 0.9925
+2026-05-16 21:49:37,295 [INFO] elevated_bnp                  : 0.6017
+2026-05-16 21:49:37,295 [INFO] elevated_troponin             : 0.7501
