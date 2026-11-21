@@ -1,0 +1,72 @@
+2026-05-16 21:45:28,391 [INFO] === CXR Stage 2 Test Evaluation ===
+2026-05-16 21:45:30,420 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_cxr_only/best_stage2_weights.pth
+2026-05-16 21:47:20,721 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 21:47:20,730 [INFO] 
+[MORTALITY]
+2026-05-16 21:47:20,730 [INFO] AUROC       : 0.7941
+2026-05-16 21:47:20,730 [INFO] AUPRC       : 0.1966
+2026-05-16 21:47:20,730 [INFO] F1          : 0.2581
+2026-05-16 21:47:20,730 [INFO] Sensitivity : 0.7356
+2026-05-16 21:47:20,730 [INFO] Specificity : 0.7133
+2026-05-16 21:47:20,730 [INFO] 
+[AHF]
+2026-05-16 21:47:20,730 [INFO] AUROC       : 0.7969
+2026-05-16 21:47:20,730 [INFO] AUPRC       : 0.5741
+2026-05-16 21:47:20,730 [INFO] F1          : 0.5718
+2026-05-16 21:47:20,730 [INFO] Sensitivity : 0.7851
+2026-05-16 21:47:20,730 [INFO] Specificity : 0.6574
+2026-05-16 21:47:20,730 [INFO] 
+[CONCEPTS]
+2026-05-16 21:47:20,730 [INFO] Mean Concept AUROC : 0.8056
+2026-05-16 21:47:20,730 [INFO] lung_opacity                  : 0.7120
+2026-05-16 21:47:20,730 [INFO] pleural_effusion              : 0.8636
+2026-05-16 21:47:20,730 [INFO] support_tube                  : 0.8912
+2026-05-16 21:47:20,730 [INFO] heart_enlarged                : 0.8120
+2026-05-16 21:47:20,730 [INFO] lung_atelectasis              : 0.7279
+2026-05-16 21:47:20,730 [INFO] pulmonary_edema               : 0.8556
+2026-05-16 21:47:20,730 [INFO] support_line                  : 0.7430
+2026-05-16 21:47:20,730 [INFO] vascular_congestion           : 0.7774
+2026-05-16 21:47:20,730 [INFO] lungs_hyperinflated           : 0.8993
+2026-05-16 21:47:20,730 [INFO] apical_pneumothorax           : 0.8095
+2026-05-16 21:47:20,730 [INFO] hemidiaphragm_elevation       : 0.7698
+2026-05-16 21:47:20,730 [INFO] rib_fractures                 : 0.6994
+2026-05-16 21:47:20,730 [INFO] interstitial_markings         : 0.8165
+2026-05-16 21:47:20,730 [INFO] volume_loss                   : 0.7648
+2026-05-16 21:47:20,730 [INFO] atrium_leads                  : 0.9422
+2026-05-16 22:38:25,027 [INFO] === CXR Stage 2 Test Evaluation ===
+2026-05-16 22:38:27,098 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_cxr_only/best_stage2_weights.pth
+2026-05-16 22:40:14,434 [INFO] 
+=== FINAL TEST RESULTS ===
+2026-05-16 22:40:14,434 [INFO] 
+[MORTALITY]
+2026-05-16 22:40:14,434 [INFO] AUROC       : 0.7941
+2026-05-16 22:40:14,434 [INFO] AUPRC       : 0.1966
+2026-05-16 22:40:14,434 [INFO] F1          : 0.2909
+2026-05-16 22:40:14,434 [INFO] Sensitivity : 0.5113
+2026-05-16 22:40:14,434 [INFO] Specificity : 0.8550
+2026-05-16 22:40:14,434 [INFO] 
+[AHF]
+2026-05-16 22:40:14,434 [INFO] AUROC       : 0.7969
+2026-05-16 22:40:14,434 [INFO] AUPRC       : 0.5741
+2026-05-16 22:40:14,434 [INFO] F1          : 0.5752
+2026-05-16 22:40:14,434 [INFO] Sensitivity : 0.7660
+2026-05-16 22:40:14,434 [INFO] Specificity : 0.6801
+2026-05-16 22:40:14,434 [INFO] 
+[CONCEPTS]
+2026-05-16 22:40:14,434 [INFO] Mean Concept AUROC : 0.8056
+2026-05-16 22:40:14,434 [INFO] lung_opacity                  : 0.7120
+2026-05-16 22:40:14,434 [INFO] pleural_effusion              : 0.8636
+2026-05-16 22:40:14,434 [INFO] support_tube                  : 0.8912
+2026-05-16 22:40:14,434 [INFO] heart_enlarged                : 0.8120
+2026-05-16 22:40:14,434 [INFO] lung_atelectasis              : 0.7279
+2026-05-16 22:40:14,434 [INFO] pulmonary_edema               : 0.8556
+2026-05-16 22:40:14,434 [INFO] support_line                  : 0.7430
+2026-05-16 22:40:14,434 [INFO] vascular_congestion           : 0.7774
+2026-05-16 22:40:14,434 [INFO] lungs_hyperinflated           : 0.8993
+2026-05-16 22:40:14,434 [INFO] apical_pneumothorax           : 0.8095
+2026-05-16 22:40:14,434 [INFO] hemidiaphragm_elevation       : 0.7698
+2026-05-16 22:40:14,434 [INFO] rib_fractures                 : 0.6994
+2026-05-16 22:40:14,434 [INFO] interstitial_markings         : 0.8165
+2026-05-16 22:40:14,434 [INFO] volume_loss                   : 0.7648
+2026-05-16 22:40:14,434 [INFO] atrium_leads                  : 0.9422

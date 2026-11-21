@@ -1,0 +1,44 @@
+2026-05-17 12:21:19,136 [INFO] Starting EHR UniModal Test
+2026-05-17 12:21:19,136 [INFO] Threshold strategy: f1
+2026-05-17 12:21:19,136 [INFO] Bootstrap samples : 1000
+2026-05-17 12:21:19,763 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_ehr_only/best_stage2_weights.pth
+2026-05-17 12:21:19,763 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-17 12:21:20,711 [INFO]   Mortality threshold : 0.8051
+2026-05-17 12:21:20,711 [INFO]   AHF threshold       : 0.4104
+2026-05-17 12:21:20,711 [INFO] 
+Running inference on test set...
+2026-05-17 12:21:26,363 [INFO] Starting EHR UniModal Test
+2026-05-17 12:21:26,363 [INFO] Threshold strategy: f1
+2026-05-17 12:21:26,363 [INFO] Bootstrap samples : 1000
+2026-05-17 12:21:26,967 [INFO] Weights loaded from: /home/azwad/Works/Multimodal-CBM/Stage_2/checkpoints_4/run_ehr_only/best_stage2_weights.pth
+2026-05-17 12:21:26,967 [INFO] 
+Finding optimal thresholds on validation set...
+2026-05-17 12:21:27,915 [INFO]   Mortality threshold : 0.8051
+2026-05-17 12:21:27,915 [INFO]   AHF threshold       : 0.4104
+2026-05-17 12:21:27,915 [INFO] 
+Running inference on test set...
+2026-05-17 12:21:28,813 [INFO] 
+============================================================
+2026-05-17 12:21:28,813 [INFO] FINAL TEST RESULTS WITH 95% CI (BCa Bootstrap)
+2026-05-17 12:21:28,813 [INFO] ============================================================
+2026-05-17 12:21:28,813 [INFO] 
+  [MORTALITY]  threshold = 0.8051
+2026-05-17 12:22:10,047 [INFO]   AUROC       : 0.9343  (95% CI 0.9236–0.9434)
+2026-05-17 12:22:38,817 [INFO]   AUPRC       : 0.7564  (95% CI 0.7320–0.7806)
+2026-05-17 12:23:04,259 [INFO]   F1          : 0.7123  (95% CI 0.6870–0.7374)
+2026-05-17 12:23:13,579 [INFO]   Sensitivity : 0.5959  (95% CI 0.5641–0.6274)
+2026-05-17 12:23:22,950 [INFO]   Specificity : 0.9944  (95% CI 0.9931–0.9955)
+2026-05-17 12:23:22,950 [INFO]   Prevalence  : 0.068  (pos=1022, neg=14116, total=15138)
+2026-05-17 12:23:22,950 [INFO] 
+  [AHF]  threshold = 0.4104
+2026-05-17 12:24:07,205 [INFO]   AUROC       : 0.6565  (95% CI 0.6451–0.6664)
+2026-05-17 12:24:37,666 [INFO]   AUPRC       : 0.4041  (95% CI 0.3877–0.4179)
+2026-05-17 12:25:07,415 [INFO]   F1          : 0.4618  (95% CI 0.4507–0.4722)
+2026-05-17 12:25:17,761 [INFO]   Sensitivity : 0.7363  (95% CI 0.7215–0.7496)
+2026-05-17 12:25:28,032 [INFO]   Specificity : 0.4823  (95% CI 0.4731–0.4912)
+2026-05-17 12:25:28,032 [INFO]   Prevalence  : 0.263  (pos=3978, neg=11160, total=15138)
+2026-05-17 12:25:28,032 [INFO] 
+  Combined AUROC (mean): 0.7954
+2026-05-17 12:25:28,032 [INFO] 
+Done.

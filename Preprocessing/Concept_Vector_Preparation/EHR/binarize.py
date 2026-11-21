@@ -5,7 +5,7 @@ print("Loading data...")
 vitals = pd.read_csv('/home/azwad/Works/Multimodal-CBM/Preprocessing/Concept_Vector_Preparation/EHR/filtered_vitals.csv')
 labs   = pd.read_csv('/home/azwad/Works/Multimodal-CBM/Preprocessing/Concept_Vector_Preparation/EHR/filtered_labs.csv')
 # Load CXR anchor times — one row per CXR with hadm_id and StudyDateTime
-cxr_anchors = pd.read_csv('/home/azwad/Works/Multimodal-CBM/Datasets/mimic-cxr-reports (1)/cxr_mapped_to_hadm.csv',
+cxr_anchors = pd.read_csv('/home/azwad/Works/Multimodal-CBM/Datasets/CXR/cxr_mapped_to_hadm.csv',
                            usecols=['hadm_id', 'study_id', 'StudyDateTime'])
 cxr_anchors['StudyDateTime'] = pd.to_datetime(cxr_anchors['StudyDateTime'])
 

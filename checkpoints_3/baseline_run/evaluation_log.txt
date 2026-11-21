@@ -1,0 +1,70 @@
+--- EVALUATING EXPERIMENT: trimodal ---
+--- EVALUATING EXPERIMENT: cxr_only ---
+--- EVALUATING EXPERIMENT: cxr_only ---
+
+================ FINAL TEST RESULTS ================
+MORTALITY PREDICTION:
+  AUROC: 0.8273
+  AUPRC: 0.2526
+  F1: 0.3248
+  Sensitivity: 0.5568
+  Specificity: 0.8645
+  ECE: 0.2601
+
+ACUTE HEART FAILURE (AHF) PREDICTION:
+  AUROC: 0.8226
+  AUPRC: 0.6308
+  F1: 0.6026
+  Sensitivity: 0.6737
+  Specificity: 0.7996
+  ECE: 0.2258
+
+CONCEPT PREDICTION METRICS:
+  Mean AUROC: 0.6129
+  Mean AUPRC: 0.1733
+
+Per-Concept AUROC:
+  Concept 0: 0.7033
+  Concept 1: 0.8559
+  Concept 2: 0.9268
+  Concept 3: 0.8131
+  Concept 4: 0.7208
+  Concept 5: 0.8559
+  Concept 6: 0.7873
+  Concept 7: 0.7833
+  Concept 8: 0.9145
+  Concept 9: 0.8293
+  Concept 10: 0.7981
+  Concept 11: 0.7056
+  Concept 12: 0.8176
+  Concept 13: 0.7496
+  Concept 14: 0.9788
+  Concept 15: 0.5000
+  Concept 16: 0.5000
+  Concept 17: 0.5000
+  Concept 18: 0.5000
+  Concept 19: 0.5000
+  Concept 20: 0.5000
+  Concept 21: 0.5000
+  Concept 22: 0.5000
+  Concept 23: 0.5000
+  Concept 24: 0.5000
+  Concept 25: 0.5000
+  Concept 26: 0.5000
+  Concept 27: 0.5000
+  Concept 28: 0.5000
+  Concept 29: 0.5000
+  Concept 30: 0.5000
+  Concept 31: 0.5000
+  Concept 32: 0.5000
+  Concept 33: 0.5000
+  Concept 34: 0.5000
+  Concept 35: 0.5000
+  Concept 36: 0.5000
+  Concept 37: 0.5000
+  Concept 38: 0.5000
+  Concept 39: 0.5000
+  Concept 40: 0.5000
+  Concept 41: 0.5000
+====================================================
+

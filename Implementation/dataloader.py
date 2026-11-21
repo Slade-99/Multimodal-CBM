@@ -143,7 +143,7 @@ class MultimodalCBMDataset(Dataset):
             self.view_map = {}
 
         # ===== FAST: Pre-process all EHR data at once =====
-        print("Pre-processing EHR data into RAM...")
+        #print("Pre-processing EHR data into RAM...")
         self.ehr_features_all, self.ehr_masks_all = self._bulk_process_ehr(self.data)
         
         # Pre-extract concepts and targets to pure numpy/tensors for fast indexing
@@ -305,7 +305,7 @@ class MultimodalCBMDataset(Dataset):
 
         # ===== EHR =====
         ehr_features = self.ehr_features_all[idx]
-        ehr_mask = self.ehr_masks_all[idx]
+        ehr_feat_mask = self.ehr_masks_all[idx]
         
         cxr_concepts = self.cxr_concepts_all[idx]
         ecg_concepts = self.ecg_concepts_all[idx]
@@ -337,7 +337,7 @@ class MultimodalCBMDataset(Dataset):
             'ecg_mod_mask': ecg_mod_mask,
 
             'ehr_features': ehr_features,   # (len(EHR_FEATURES),)  normalised
-            'ehr_mask':     ehr_mask,        # (len(EHR_FEATURES),)  1=observed
+            'ehr_mask':     ehr_feat_mask,        # (len(EHR_FEATURES),)  1=observed
             'ehr_mod_mask': ehr_mod_mask,    # scalar 1=keep ehr, 0=drop ehr
             'cxr_mod_mask': cxr_mod_mask,    # scalar 1=keep cxr, 0=drop cxr
 
@@ -390,7 +390,7 @@ def get_dataloaders(train_csv, val_csv, test_csv, batch_size=32, dropout_config:
 
     train_loader = DataLoader(
         train_ds, batch_size=batch_size, shuffle=True,
-        num_workers=8,               # Hires more background assistants
+        num_workers=4,               # Hires more background assistants
         pin_memory=True,             # Puts data directly into fast lane for GPU transfer
         prefetch_factor=2,           # Tells assistants to grab 2 batches in advance
         persistent_workers=True,     # Keeps assistants alive between epochs
